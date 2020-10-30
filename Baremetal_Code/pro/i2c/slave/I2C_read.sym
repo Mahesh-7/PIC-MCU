@@ -1,0 +1,205 @@
+_RE0 48 0 ABS
+_RE2 4A 0 ABS
+__S0 800 0 ABS
+__S1 75 0 ABS
+__S2 0 0 ABS
+_PEN 48A 0 ABS
+_SEN 488 0 ABS
+__Hintentry 0 0 CODE
+__Lintentry 0 0 CODE
+_RCEN 48B 0 ABS
+_RSEN 489 0 ABS
+_main 7D5 0 CODE
+btemp 7E 0 ABS
+_exit 0 0 CODE
+start 0 0 CODE
+?_lcd_cmd 70 0 COMMON
+_TRISB 86 0 ABS
+_SSPIF 63 0 ABS
+_TRISC 87 0 ABS
+reset_vec 0 0 CODE
+_PORTB 6 0 ABS
+_ACKEN 48C 0 ABS
+_TRISE 89 0 ABS
+_PORTE 9 0 ABS
+_ACKDT 48D 0 ABS
+wtemp0 7E 0 ABS
+__end_of_delay 7B4 0 CODE
+__Hconfig 0 0 CONFIG
+__Lconfig 0 0 CONFIG
+__Hram 0 0 ABS
+__Lram 0 0 ABS
+?_main 70 0 COMMON
+_lcd_char 76E 0 CODE
+__end_of_lcd_cmd 796 0 CODE
+_delay 796 0 CODE
+__Hfunctab 0 0 CODE
+__Lfunctab 0 0 CODE
+main@temp 74 0 COMMON
+_ADCON1 9F 0 ABS
+__Hcommon 0 0 ABS
+__Lcommon 0 0 ABS
+__Heeprom_data 0 0 EEDATA
+__Leeprom_data 0 0 EEDATA
+_SSPADD 93 0 ABS
+??_lcd_cmd 70 0 COMMON
+_lcd_init 7B4 0 CODE
+_SSPBUF 13 0 ABS
+__end_of_I2C_read_byte 76E 0 CODE
+__Habs1 0 0 ABS
+__Labs1 0 0 ABS
+_SSPCON 14 0 ABS
+__Hsfr0 0 0 ABS
+__Lsfr0 0 0 ABS
+__Hsfr1 0 0 ABS
+__Lsfr1 0 0 ABS
+__Hsfr2 0 0 ABS
+__Lsfr2 0 0 ABS
+__Hsfr3 0 0 ABS
+__Lsfr3 0 0 ABS
+__size_of_delay 0 0 ABS
+__ptext130 76E 0 CODE
+_I2C_slave_init 754 0 CODE
+__ptext131 761 0 CODE
+__ptext132 754 0 CODE
+delay@i 70 0 COMMON
+__ptext133 796 0 CODE
+__size_of_lcd_char 0 0 ABS
+__Hcode 0 0 ABS
+__Lcode 0 0 ABS
+__ptext134 0 0 CODE
+??_main 73 0 COMMON
+?_lcd_char 70 0 COMMON
+__Hinit 0 0 CODE
+__Linit 0 0 CODE
+?_delay 70 0 COMMON
+__end_of_main 800 0 CODE
+__ptext127 0 0 CODE
+lcd_cmd@cmd 72 0 COMMON
+__Htext 0 0 ABS
+__Ltext 0 0 ABS
+__ptext128 7B4 0 CODE
+end_of_initialization 750 0 CODE
+__ptext129 782 0 CODE
+??_I2C_slave_init 70 0 COMMON
+__end_of_lcd_char 782 0 CODE
+__Hstrings 0 0 ABS
+__Lstrings 0 0 ABS
+?_lcd_init 70 0 COMMON
+lcd_char@data 72 0 COMMON
+__Hbank0 0 0 ABS
+__Lbank0 0 0 ABS
+__Hbank1 0 0 ABS
+__Lbank1 0 0 ABS
+__Hbank2 0 0 ABS
+__size_of_I2C_slave_init 0 0 ABS
+__Lbank2 0 0 ABS
+__Hbank3 0 0 ABS
+__Lbank3 0 0 ABS
+_ACKSTAT 48E 0 ABS
+__Hpowerup 0 0 CODE
+_SSPSTAT 94 0 ABS
+__Lpowerup 0 0 CODE
+__size_of_lcd_init 0 0 ABS
+__Hclrtext 0 0 ABS
+__Lclrtext 0 0 ABS
+?_I2C_slave_init 70 0 COMMON
+?_I2C_read_byte 70 0 COMMON
+_lcd_cmd 782 0 CODE
+__Hidloc 0 0 IDLOC
+__Lidloc 0 0 IDLOC
+??_lcd_char 70 0 COMMON
+__Hcinit 0 0 ABS
+??_delay 70 0 COMMON
+__Lcinit 0 0 ABS
+__size_of_main 0 0 ABS
+__size_of_lcd_cmd 0 0 ABS
+_I2C_read_byte 761 0 CODE
+??_lcd_init 73 0 COMMON
+__Hend_init 3 0 CODE
+__Lend_init 0 0 CODE
+__Hreset_vec 0 0 CODE
+__Lreset_vec 0 0 CODE
+intlevel0 0 0 CODE
+intlevel1 0 0 CODE
+intlevel2 0 0 CODE
+intlevel3 0 0 CODE
+intlevel4 0 0 CODE
+intlevel5 0 0 CODE
+__HcstackCOMMON 0 0 ABS
+__LcstackCOMMON 0 0 ABS
+__pcstackCOMMON 70 0 COMMON
+start_initialization 750 0 CODE
+__Hmaintext 0 0 ABS
+__Lmaintext 0 0 ABS
+__pmaintext 7D5 0 CODE
+__end_of_I2C_slave_init 761 0 CODE
+__size_of_I2C_read_byte 0 0 ABS
+__end_of_lcd_init 7D5 0 CODE
+??_I2C_read_byte 70 0 COMMON
+%segments
+reset_vec 0 5 CODE 0
+cstackCOMMON 70 74 COMMON 70
+maintext FAA FFF CODE FAA
+text128 F68 FA9 CODE F68
+text133 F2C F67 CODE F2C
+text129 F04 F2B CODE F04
+text130 EDC F03 CODE EDC
+text131 EC2 EDB CODE EC2
+text132 EA8 EC1 CODE EA8
+cinit EA0 EA7 CODE EA0
+%locals
+startup.obj
+startup.as
+65 0 0 CODE
+I2C_read.obj
+I2C_read.as
+104 750 0 CODE
+105 751 0 CODE
+C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_slave.c
+13 7D5 0 CODE
+15 7DA 0 CODE
+17 7DF 0 CODE
+19 7E4 0 CODE
+25 7E9 0 CODE
+26 7F1 0 CODE
+27 7F6 0 CODE
+22 7FC 0 CODE
+32 7FD 0 CODE
+C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\lcd\src\lcd_driver.c
+39 7B4 0 CODE
+40 7B8 0 CODE
+41 7B9 0 CODE
+42 7BC 0 CODE
+43 7BF 0 CODE
+44 7C2 0 CODE
+45 7C8 0 CODE
+46 7CE 0 CODE
+47 7D4 0 CODE
+9 782 0 CODE
+10 783 0 CODE
+11 786 0 CODE
+12 788 0 CODE
+13 789 0 CODE
+14 792 0 CODE
+15 795 0 CODE
+20 76E 0 CODE
+21 772 0 CODE
+22 774 0 CODE
+23 775 0 CODE
+24 77E 0 CODE
+26 781 0 CODE
+C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c
+78 761 0 CODE
+79 764 0 CODE
+80 76B 0 CODE
+81 76C 0 CODE
+83 76D 0 CODE
+24 754 0 CODE
+25 758 0 CODE
+26 75A 0 CODE
+27 75C 0 CODE
+28 760 0 CODE
+C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_slave.c
+9 796 0 CODE
+10 7B3 0 CODE

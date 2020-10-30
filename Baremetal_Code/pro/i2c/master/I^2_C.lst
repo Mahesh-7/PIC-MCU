@@ -1,0 +1,1156 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.71a build 6446 
+                                                                                               Fri Oct 23 18:37:01 2020
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 6446
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 6446"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_I2C_master_init
+    43                           	FNCALL	_main,_delay
+    44                           	FNCALL	_main,_I2C_start
+    45                           	FNCALL	_main,_I2C_write_byte
+    46                           	FNCALL	_main,_I2C_write_string
+    47                           	FNCALL	_main,_I2C_stop
+    48                           	FNCALL	_I2C_write_string,_I2C_write_byte
+    49                           	FNCALL	_I2C_write_string,_delay1
+    50                           	FNROOT	_main
+    51                           	global	_PORTB
+    52                           psect	text126,local,class=CODE,delta=2
+    53                           global __ptext126
+    54  0000                     __ptext126:
+    55  0006                     _PORTB	set	6
+    56                           	global	_PORTE
+    57  0009                     _PORTE	set	9
+    58                           	global	_SSPBUF
+    59  0013                     _SSPBUF	set	19
+    60                           	global	_SSPCON
+    61  0014                     _SSPCON	set	20
+    62                           	global	_RE0
+    63  0048                     _RE0	set	72
+    64                           	global	_RE2
+    65  004A                     _RE2	set	74
+    66                           	global	_SSPIF
+    67  0063                     _SSPIF	set	99
+    68                           	global	_ADCON1
+    69  009F                     _ADCON1	set	159
+    70                           	global	_SSPADD
+    71  0093                     _SSPADD	set	147
+    72                           	global	_SSPSTAT
+    73  0094                     _SSPSTAT	set	148
+    74                           	global	_TRISB
+    75  0086                     _TRISB	set	134
+    76                           	global	_TRISC
+    77  0087                     _TRISC	set	135
+    78                           	global	_TRISE
+    79  0089                     _TRISE	set	137
+    80                           	global	_ACKDT
+    81  048D                     _ACKDT	set	1165
+    82                           	global	_ACKEN
+    83  048C                     _ACKEN	set	1164
+    84                           	global	_ACKSTAT
+    85  048E                     _ACKSTAT	set	1166
+    86                           	global	_PEN
+    87  048A                     _PEN	set	1162
+    88                           	global	_RCEN
+    89  048B                     _RCEN	set	1163
+    90                           	global	_RSEN
+    91  0489                     _RSEN	set	1161
+    92                           	global	_SEN
+    93  0488                     _SEN	set	1160
+    94                           psect	strings,class=STRING,delta=2
+    95                           global __pstrings
+    96  0003                     __pstrings:
+    97                           ;	global	stringdir,stringtab,__stringbase
+    98  0003                     stringtab:
+    99                           ;	String table - string pointers are 1 byte each
+   100  0003                     stringcode:stringdir:
+      + 0003                     stringdir:	
+   101  0003  3000               movlw high(stringdir)
+   102  0004  008A               movwf pclath
+   103  0005  0804               movf fsr,w
+   104  0006  0A84               incf fsr
+   105  0007  0782               	addwf pc
+   106  0008                     __stringbase:
+   107  0008  3400               	retlw	0
+   108                           psect	strings
+   109                           	
+   110  0009                     STR_1:	
+   111  0009  3468               	retlw	104	;'h'
+   112  000A  3465               	retlw	101	;'e'
+   113  000B  346C               	retlw	108	;'l'
+   114  000C  346C               	retlw	108	;'l'
+   115  000D  346F               	retlw	111	;'o'
+   116  000E  3420               	retlw	32	;' '
+   117  000F  3477               	retlw	119	;'w'
+   118  0010  346F               	retlw	111	;'o'
+   119  0011  3472               	retlw	114	;'r'
+   120  0012  346C               	retlw	108	;'l'
+   121  0013  3464               	retlw	100	;'d'
+   122  0014  3400               	retlw	0
+   123                           psect	strings
+   124                           	file	"I^2_C.as"
+   125                           	line	#
+   126                           psect cinit,class=CODE,delta=2
+   127                           global start_initialization
+   128  0712                     start_initialization:
+   129                           
+   130                           psect cinit,class=CODE,delta=2
+   131                           global end_of_initialization
+   132                           
+   133                           ;End of C runtime variable initialization code
+   134                           
+   135  0712                     end_of_initialization:
+   136  0712  0183               clrf status
+   137  0713  120A  118A  2FA7   ljmp _main	;jump to C main() function
+   138                           psect	cstackCOMMON,class=COMMON,space=1
+   139                           global __pcstackCOMMON
+   140  0070                     __pcstackCOMMON:
+   141                           	global	?_delay1
+   142  0070                     ?_delay1:	; 0 bytes @ 0x0
+   143                           	global	??_delay1
+   144  0070                     ??_delay1:	; 0 bytes @ 0x0
+   145                           	global	?_I2C_master_init
+   146  0070                     ?_I2C_master_init:	; 0 bytes @ 0x0
+   147                           	global	??_I2C_master_init
+   148  0070                     ??_I2C_master_init:	; 0 bytes @ 0x0
+   149                           	global	?_I2C_start
+   150  0070                     ?_I2C_start:	; 0 bytes @ 0x0
+   151                           	global	??_I2C_start
+   152  0070                     ??_I2C_start:	; 0 bytes @ 0x0
+   153                           	global	?_I2C_stop
+   154  0070                     ?_I2C_stop:	; 0 bytes @ 0x0
+   155                           	global	??_I2C_stop
+   156  0070                     ??_I2C_stop:	; 0 bytes @ 0x0
+   157                           	global	??_I2C_write_byte
+   158  0070                     ??_I2C_write_byte:	; 0 bytes @ 0x0
+   159                           	global	?_I2C_write_string
+   160  0070                     ?_I2C_write_string:	; 0 bytes @ 0x0
+   161                           	global	?_delay
+   162  0070                     ?_delay:	; 0 bytes @ 0x0
+   163                           	global	??_delay
+   164  0070                     ??_delay:	; 0 bytes @ 0x0
+   165                           	global	?_main
+   166  0070                     ?_main:	; 0 bytes @ 0x0
+   167                           	global	?_I2C_write_byte
+   168  0070                     ?_I2C_write_byte:	; 1 bytes @ 0x0
+   169                           	global	I2C_write_byte@byte
+   170  0070                     I2C_write_byte@byte:	; 1 bytes @ 0x0
+   171                           	global	delay1@i
+   172  0070                     delay1@i:	; 2 bytes @ 0x0
+   173                           	global	delay@i
+   174  0070                     delay@i:	; 2 bytes @ 0x0
+   175  0070                     	ds	2
+   176                           	global	??_I2C_write_string
+   177  0072                     ??_I2C_write_string:	; 0 bytes @ 0x2
+   178  0072                     	ds	1
+   179                           	global	I2C_write_string@data
+   180  0073                     I2C_write_string@data:	; 1 bytes @ 0x3
+   181  0073                     	ds	1
+   182                           	global	??_main
+   183  0074                     ??_main:	; 0 bytes @ 0x4
+   184 ;;Data sizes: Strings 12, constant 0, data 0, bss 0, persistent 0 stack 0
+   185 ;;Auto spaces:   Size  Autos    Used
+   186 ;; COMMON          14      4       4
+   187 ;; BANK0           80      0       0
+   188 ;; BANK1           80      0       0
+   189 ;; BANK3           96      0       0
+   190 ;; BANK2           96      0       0
+   191                           
+   192 ;;
+   193 ;; Pointer list with targets:
+   194                           
+   195 ;; I2C_write_string@data	PTR unsigned char  size(1) Largest target is 12
+   196 ;;		 -> STR_1(CODE[12]), 
+   197 ;;
+   198                           
+   199                           
+   200 ;;
+   201 ;; Critical Paths under _main in COMMON
+   202 ;;
+   203 ;;   _main->_I2C_write_string
+   204 ;;   _I2C_write_string->_delay1
+   205 ;;
+   206 ;; Critical Paths under _main in BANK0
+   207 ;;
+   208 ;;   None.
+   209 ;;
+   210 ;; Critical Paths under _main in BANK1
+   211 ;;
+   212 ;;   None.
+   213 ;;
+   214 ;; Critical Paths under _main in BANK3
+   215 ;;
+   216 ;;   None.
+   217 ;;
+   218 ;; Critical Paths under _main in BANK2
+   219 ;;
+   220 ;;   None.
+   221                           
+   222 ;;
+   223 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   224 ;;
+   225                           
+   226 ;;
+   227 ;;Call Graph Tables:
+   228 ;;
+   229 ;; ---------------------------------------------------------------------------------
+   230 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   231 ;; ---------------------------------------------------------------------------------
+   232 ;; (0) _main                                                 0     0      0     120
+   233 ;;                    _I2C_master_init
+   234 ;;                              _delay
+   235 ;;                          _I2C_start
+   236 ;;                     _I2C_write_byte
+   237 ;;                   _I2C_write_string
+   238 ;;                           _I2C_stop
+   239 ;; ---------------------------------------------------------------------------------
+   240 ;; (1) _I2C_write_string                                     2     2      0      75
+   241 ;;                                              2 COMMON     2     2      0
+   242 ;;                     _I2C_write_byte
+   243 ;;                             _delay1
+   244 ;; ---------------------------------------------------------------------------------
+   245 ;; (1) _delay                                                2     2      0      30
+   246 ;;                                              0 COMMON     2     2      0
+   247 ;; ---------------------------------------------------------------------------------
+   248 ;; (2) _I2C_write_byte                                       1     1      0      15
+   249 ;;                                              0 COMMON     1     1      0
+   250 ;; ---------------------------------------------------------------------------------
+   251 ;; (1) _I2C_stop                                             0     0      0       0
+   252 ;; ---------------------------------------------------------------------------------
+   253 ;; (1) _I2C_start                                            0     0      0       0
+   254 ;; ---------------------------------------------------------------------------------
+   255 ;; (1) _I2C_master_init                                      0     0      0       0
+   256 ;; ---------------------------------------------------------------------------------
+   257 ;; (2) _delay1                                               2     2      0      30
+   258 ;;                                              0 COMMON     2     2      0
+   259 ;; ---------------------------------------------------------------------------------
+   260 ;; Estimated maximum stack depth 2
+   261 ;; ---------------------------------------------------------------------------------
+   262                           
+   263 ;; Call Graph Graphs:
+   264                           
+   265 ;; _main (ROOT)
+   266 ;;   _I2C_master_init
+   267 ;;   _delay
+   268 ;;   _I2C_start
+   269 ;;   _I2C_write_byte
+   270 ;;   _I2C_write_string
+   271 ;;     _I2C_write_byte
+   272 ;;     _delay1
+   273 ;;   _I2C_stop
+   274 ;;
+   275                           
+   276 ;; Address spaces:
+   277                           
+   278 ;;Name               Size   Autos  Total    Cost      Usage
+   279 ;;BITCOMMON            E      0       0       0        0.0%
+   280 ;;EEDATA             100      0       0       0        0.0%
+   281 ;;NULL                 0      0       0       0        0.0%
+   282 ;;CODE                 0      0       0       0        0.0%
+   283 ;;COMMON               E      4       4       1       28.6%
+   284 ;;BITSFR0              0      0       0       1        0.0%
+   285 ;;SFR0                 0      0       0       1        0.0%
+   286 ;;BITSFR1              0      0       0       2        0.0%
+   287 ;;SFR1                 0      0       0       2        0.0%
+   288 ;;STACK                0      0       2       2        0.0%
+   289 ;;ABS                  0      0       0       3        0.0%
+   290 ;;BITBANK0            50      0       0       4        0.0%
+   291 ;;BITSFR3              0      0       0       4        0.0%
+   292 ;;SFR3                 0      0       0       4        0.0%
+   293 ;;BANK0               50      0       0       5        0.0%
+   294 ;;BITSFR2              0      0       0       5        0.0%
+   295 ;;SFR2                 0      0       0       5        0.0%
+   296 ;;BITBANK1            50      0       0       6        0.0%
+   297 ;;BANK1               50      0       0       7        0.0%
+   298 ;;BITBANK3            60      0       0       8        0.0%
+   299 ;;BANK3               60      0       0       9        0.0%
+   300 ;;BITBANK2            60      0       0      10        0.0%
+   301 ;;BANK2               60      0       0      11        0.0%
+   302 ;;DATA                 0      0       0      12        0.0%
+   303                           
+   304                           	global	_main
+   305                           psect	maintext,global,class=CODE,delta=2
+   306                           global __pmaintext
+   307  07A7                     __pmaintext:
+   308                           
+   309 ;; *************** function _main *****************
+   310 ;; Defined at:
+   311 ;;		line 11 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_master.c"
+   312 ;; Parameters:    Size  Location     Type
+   313 ;;		None
+   314 ;; Auto vars:     Size  Location     Type
+   315 ;;		None
+   316 ;; Return value:  Size  Location     Type
+   317 ;;		None               void
+   318 ;; Registers used:
+   319 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   320 ;; Tracked objects:
+   321 ;;		On entry : 17F/0
+   322 ;;		On exit  : 0/0
+   323 ;;		Unchanged: 0/0
+   324 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   325 ;;      Params:         0       0       0       0       0
+   326 ;;      Locals:         0       0       0       0       0
+   327 ;;      Temps:          0       0       0       0       0
+   328 ;;      Totals:         0       0       0       0       0
+   329 ;;Total ram usage:        0 bytes
+   330 ;; Hardware stack levels required when called:    2
+   331 ;; This function calls:
+   332 ;;		_I2C_master_init
+   333 ;;		_delay
+   334 ;;		_I2C_start
+   335 ;;		_I2C_write_byte
+   336 ;;		_I2C_write_string
+   337 ;;		_I2C_stop
+   338 ;; This function is called by:
+   339 ;;		Startup code after reset
+   340 ;; This function uses a non-reentrant model
+   341 ;;
+   342                           psect	maintext
+   343                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_master.c"
+   344                           	line	11
+   345                           	global	__size_of_main
+   346  0059                     	__size_of_main	equ	__end_of_main-_main
+   347                           	
+   348  07A7                     _main:	
+   349                           	opt	stack 8
+   350                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   351                           	line	12
+   352                           	
+   353  07A7                     l3008:	
+   354                           ;i2c_master.c: 12: I2C_master_init();
+   355  07A7  120A  118A  273A   	fcall	_I2C_master_init
+              120A  118A         
+   356                           	line	13
+   357                           ;i2c_master.c: 13: delay();
+   358  07AC  120A  118A  2765   	fcall	_delay
+              120A  118A         
+   359                           	line	15
+   360                           	
+   361  07B1                     l3010:	
+   362                           ;i2c_master.c: 15: I2C_start();delay();
+   363  07B1  120A  118A  2716   	fcall	_I2C_start
+              120A  118A         
+   364                           	
+   365  07B6                     l3012:	
+   366  07B6  120A  118A  2765   	fcall	_delay
+              120A  118A         
+   367                           	line	16
+   368                           	
+   369  07BB                     l3014:	
+   370                           ;i2c_master.c: 16: I2C_write_byte(0x26);delay();
+   371  07BB  3026               	movlw	(026h)
+   372  07BC  120A  118A  272E   	fcall	_I2C_write_byte
+              120A  118A         
+   373                           	
+   374  07C1                     l3016:	
+   375  07C1  120A  118A  2765   	fcall	_delay
+              120A  118A         
+   376                           	line	18
+   377                           	
+   378  07C6                     l3018:	
+   379                           ;i2c_master.c: 18: I2C_write_byte('a');delay();
+   380  07C6  3061               	movlw	(061h)
+   381  07C7  120A  118A  272E   	fcall	_I2C_write_byte
+              120A  118A         
+   382                           	
+   383  07CC                     l3020:	
+   384  07CC  120A  118A  2765   	fcall	_delay
+              120A  118A         
+   385                           	line	19
+   386                           	
+   387  07D1                     l3022:	
+   388                           ;i2c_master.c: 19: I2C_write_byte('b');delay();
+   389  07D1  3062               	movlw	(062h)
+   390  07D2  120A  118A  272E   	fcall	_I2C_write_byte
+              120A  118A         
+   391                           	
+   392  07D7                     l3024:	
+   393  07D7  120A  118A  2765   	fcall	_delay
+              120A  118A         
+   394                           	line	20
+   395                           	
+   396  07DC                     l3026:	
+   397                           ;i2c_master.c: 20: I2C_write_byte('c');delay();
+   398  07DC  3063               	movlw	(063h)
+   399  07DD  120A  118A  272E   	fcall	_I2C_write_byte
+              120A  118A         
+   400                           	
+   401  07E2                     l3028:	
+   402  07E2  120A  118A  2765   	fcall	_delay
+              120A  118A         
+   403                           	line	21
+   404                           	
+   405  07E7                     l3030:	
+   406                           ;i2c_master.c: 21: I2C_write_string("hello world");delay();
+   407  07E7  3001               	movlw	((STR_1-__stringbase))&0ffh
+   408  07E8  120A  118A  2783   	fcall	_I2C_write_string
+              120A  118A         
+   409                           	
+   410  07ED                     l3032:	
+   411  07ED  120A  118A  2765   	fcall	_delay
+              120A  118A         
+   412                           	line	22
+   413                           	
+   414  07F2                     l3034:	
+   415                           ;i2c_master.c: 22: I2C_stop();delay();
+   416  07F2  120A  118A  2722   	fcall	_I2C_stop
+              120A  118A         
+   417                           	
+   418  07F7                     l3036:	
+   419  07F7  120A  118A  2765   	fcall	_delay
+              120A  118A         
+   420                           	line	24
+   421                           ;i2c_master.c: 24: while(1);
+   422                           	
+   423  07FC                     l1762:	
+   424                           	
+   425  07FC                     l1763:	
+   426  07FC  2FFC               	goto	l1762
+   427                           	
+   428  07FD                     l1764:	
+   429                           	line	25
+   430                           	
+   431  07FD                     l1765:	
+   432                           	global	start
+   433  07FD  120A  118A  2800   	ljmp	start
+   434                           	opt stack 0
+   435                           GLOBAL	__end_of_main
+   436  0800                     	__end_of_main:
+   437 ;; =============== function _main ends ============
+   438                           
+   439                           	signat	_main,88
+   440                           	global	_I2C_write_string
+   441                           psect	text127,local,class=CODE,delta=2
+   442                           global __ptext127
+   443  0783                     __ptext127:
+   444                           
+   445 ;; *************** function _I2C_write_string *****************
+   446 ;; Defined at:
+   447 ;;		line 86 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c"
+   448 ;; Parameters:    Size  Location     Type
+   449 ;;  data            1    wreg     PTR unsigned char 
+   450 ;;		 -> STR_1(12), 
+   451 ;; Auto vars:     Size  Location     Type
+   452 ;;  data            1    3[COMMON] PTR unsigned char 
+   453 ;;		 -> STR_1(12), 
+   454 ;; Return value:  Size  Location     Type
+   455 ;;		None               void
+   456 ;; Registers used:
+   457 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   458 ;; Tracked objects:
+   459 ;;		On entry : 0/0
+   460 ;;		On exit  : 0/0
+   461 ;;		Unchanged: 0/0
+   462 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   463 ;;      Params:         0       0       0       0       0
+   464 ;;      Locals:         1       0       0       0       0
+   465 ;;      Temps:          1       0       0       0       0
+   466 ;;      Totals:         2       0       0       0       0
+   467 ;;Total ram usage:        2 bytes
+   468 ;; Hardware stack levels used:    1
+   469 ;; Hardware stack levels required when called:    1
+   470 ;; This function calls:
+   471 ;;		_I2C_write_byte
+   472 ;;		_delay1
+   473 ;; This function is called by:
+   474 ;;		_main
+   475 ;; This function uses a non-reentrant model
+   476 ;;
+   477                           psect	text127
+   478                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_
+                                 driver.c"
+   479                           	line	86
+   480                           	global	__size_of_I2C_write_string
+   481  0024                     	__size_of_I2C_write_string	equ	__end_of_I2C_write_string-_I2C_write_string
+   482                           	
+   483  0783                     _I2C_write_string:	
+   484                           	opt	stack 7
+   485                           ; Regs used in _I2C_write_string: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   486                           ;I2C_write_string@data stored from wreg
+   487  0783  00F3               	movwf	(I2C_write_string@data)
+   488                           	line	87
+   489                           	
+   490  0784                     l2998:	
+   491                           ;I2C_driver.c: 87: while(*data)
+   492  0784  2F9A               	goto	l612
+   493                           	
+   494  0785                     l613:	
+   495                           	line	89
+   496                           	
+   497  0785                     l3000:	
+   498                           ;I2C_driver.c: 88: {
+   499                           ;I2C_driver.c: 89: I2C_write_byte(*data++);
+   500  0785  0873               	movf	(I2C_write_string@data),w
+   501  0786  0084               	movwf	fsr0
+   502  0787  120A  118A  2003   	fcall	stringdir
+              120A  118A         
+   503  078C  120A  118A  272E   	fcall	_I2C_write_byte
+              120A  118A         
+   504                           	
+   505  0791                     l3002:	
+   506  0791  3001               	movlw	(01h)
+   507  0792  00F2               	movwf	(??_I2C_write_string+0)+0
+   508  0793  0872               	movf	(??_I2C_write_string+0)+0,w
+   509  0794  07F3               	addwf	(I2C_write_string@data),f
+   510                           	line	90
+   511                           	
+   512  0795                     l3004:	
+   513                           ;I2C_driver.c: 90: delay1();
+   514  0795  120A  118A  2747   	fcall	_delay1
+              120A  118A         
+   515                           	line	91
+   516                           	
+   517  079A                     l612:	
+   518                           	line	87
+   519                           	
+   520  079A                     l3006:	
+   521  079A  0873               	movf	(I2C_write_string@data),w
+   522  079B  0084               	movwf	fsr0
+   523  079C  120A  118A  2003   	fcall	stringdir
+              120A  118A         
+   524  07A1  3800               	iorlw	0
+   525  07A2  1D03               	skipz
+   526  07A3  2FA5               	goto	u2261
+   527  07A4  2FA6               	goto	u2260
+   528  07A5                     u2261:
+   529  07A5  2F85               	goto	l613
+   530  07A6                     u2260:
+   531                           	
+   532  07A6                     l614:	
+   533                           	line	92
+   534                           	
+   535  07A6                     l615:	
+   536  07A6  0008               	return
+   537                           	opt stack 0
+   538                           GLOBAL	__end_of_I2C_write_string
+   539  07A7                     	__end_of_I2C_write_string:
+   540 ;; =============== function _I2C_write_string ends ============
+   541                           
+   542                           	signat	_I2C_write_string,4216
+   543                           	global	_delay
+   544                           psect	text128,local,class=CODE,delta=2
+   545                           global __ptext128
+   546  0765                     __ptext128:
+   547                           
+   548 ;; *************** function _delay *****************
+   549 ;; Defined at:
+   550 ;;		line 6 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_master.c"
+   551 ;; Parameters:    Size  Location     Type
+   552 ;;		None
+   553 ;; Auto vars:     Size  Location     Type
+   554 ;;  i               2    0[COMMON] unsigned int 
+   555 ;; Return value:  Size  Location     Type
+   556 ;;		None               void
+   557 ;; Registers used:
+   558 ;;		wreg
+   559 ;; Tracked objects:
+   560 ;;		On entry : 0/0
+   561 ;;		On exit  : 0/0
+   562 ;;		Unchanged: 0/0
+   563 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   564 ;;      Params:         0       0       0       0       0
+   565 ;;      Locals:         2       0       0       0       0
+   566 ;;      Temps:          0       0       0       0       0
+   567 ;;      Totals:         2       0       0       0       0
+   568 ;;Total ram usage:        2 bytes
+   569 ;; Hardware stack levels used:    1
+   570 ;; This function calls:
+   571 ;;		Nothing
+   572 ;; This function is called by:
+   573 ;;		_main
+   574 ;; This function uses a non-reentrant model
+   575 ;;
+   576                           psect	text128
+   577                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_master.c"
+   578                           	line	6
+   579                           	global	__size_of_delay
+   580  001E                     	__size_of_delay	equ	__end_of_delay-_delay
+   581                           	
+   582  0765                     _delay:	
+   583                           	opt	stack 7
+   584                           ; Regs used in _delay: [wreg]
+   585                           	line	8
+   586                           	
+   587  0765                     l2206:	
+   588                           ;i2c_master.c: 7: unsigned int i;
+   589                           ;i2c_master.c: 8: for(i=0;i<10000;i++);
+   590  0765  3000               	movlw	low(0)
+   591  0766  00F0               	movwf	(delay@i)
+   592  0767  3000               	movlw	high(0)
+   593  0768  00F1               	movwf	((delay@i))+1
+   594  0769  3027               	movlw	high(02710h)
+   595  076A  0271               	subwf	(delay@i+1),w
+   596  076B  3010               	movlw	low(02710h)
+   597  076C  1903               	skipnz
+   598  076D  0270               	subwf	(delay@i),w
+   599  076E  1C03               	skipc
+   600  076F  2F71               	goto	u111
+   601  0770  2F72               	goto	u110
+   602  0771                     u111:
+   603  0771  2F73               	goto	l1757
+   604  0772                     u110:
+   605                           	
+   606  0772                     l2208:	
+   607  0772  2F82               	goto	l1758
+   608                           	
+   609  0773                     l1757:	
+   610                           	
+   611  0773                     l2210:	
+   612  0773  3001               	movlw	low(01h)
+   613  0774  07F0               	addwf	(delay@i),f
+   614  0775  1803               	skipnc
+   615  0776  0AF1               	incf	(delay@i+1),f
+   616  0777  3000               	movlw	high(01h)
+   617  0778  07F1               	addwf	(delay@i+1),f
+   618  0779  3027               	movlw	high(02710h)
+   619  077A  0271               	subwf	(delay@i+1),w
+   620  077B  3010               	movlw	low(02710h)
+   621  077C  1903               	skipnz
+   622  077D  0270               	subwf	(delay@i),w
+   623  077E  1C03               	skipc
+   624  077F  2F81               	goto	u121
+   625  0780  2F82               	goto	u120
+   626  0781                     u121:
+   627  0781  2F73               	goto	l1757
+   628  0782                     u120:
+   629                           	
+   630  0782                     l1758:	
+   631                           	line	9
+   632                           	
+   633  0782                     l1759:	
+   634  0782  0008               	return
+   635                           	opt stack 0
+   636                           GLOBAL	__end_of_delay
+   637  0783                     	__end_of_delay:
+   638 ;; =============== function _delay ends ============
+   639                           
+   640                           	signat	_delay,88
+   641                           	global	_I2C_write_byte
+   642                           psect	text129,local,class=CODE,delta=2
+   643                           global __ptext129
+   644  072E                     __ptext129:
+   645                           
+   646 ;; *************** function _I2C_write_byte *****************
+   647 ;; Defined at:
+   648 ;;		line 68 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c"
+   649 ;; Parameters:    Size  Location     Type
+   650 ;;  byte            1    wreg     unsigned char 
+   651 ;; Auto vars:     Size  Location     Type
+   652 ;;  byte            1    0[COMMON] unsigned char 
+   653 ;; Return value:  Size  Location     Type
+   654 ;;                  1    wreg      unsigned char 
+   655 ;; Registers used:
+   656 ;;		wreg
+   657 ;; Tracked objects:
+   658 ;;		On entry : 0/0
+   659 ;;		On exit  : 0/0
+   660 ;;		Unchanged: 0/0
+   661 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   662 ;;      Params:         0       0       0       0       0
+   663 ;;      Locals:         1       0       0       0       0
+   664 ;;      Temps:          0       0       0       0       0
+   665 ;;      Totals:         1       0       0       0       0
+   666 ;;Total ram usage:        1 bytes
+   667 ;; Hardware stack levels used:    1
+   668 ;; This function calls:
+   669 ;;		Nothing
+   670 ;; This function is called by:
+   671 ;;		_I2C_write_string
+   672 ;;		_main
+   673 ;; This function uses a non-reentrant model
+   674 ;;
+   675                           psect	text129
+   676                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_
+                                 driver.c"
+   677                           	line	68
+   678                           	global	__size_of_I2C_write_byte
+   679  000C                     	__size_of_I2C_write_byte	equ	__end_of_I2C_write_byte-_I2C_write_byte
+   680                           	
+   681  072E                     _I2C_write_byte:	
+   682                           	opt	stack 6
+   683                           ; Regs used in _I2C_write_byte: [wreg]
+   684                           ;I2C_write_byte@byte stored from wreg
+   685  072E  00F0               	movwf	(I2C_write_byte@byte)
+   686                           	line	69
+   687                           	
+   688  072F                     l2158:	
+   689                           ;I2C_driver.c: 69: SSPBUF=byte;
+   690  072F  0870               	movf	(I2C_write_byte@byte),w
+   691  0730  1283               	bcf	status, 5	;RP0=0, select bank0
+   692  0731  1303               	bcf	status, 6	;RP1=0, select bank0
+   693  0732  0093               	movwf	(19)	;volatile
+   694                           	line	70
+   695                           ;I2C_driver.c: 70: while(!SSPIF);
+   696  0733  2F34               	goto	l600
+   697                           	
+   698  0734                     l601:	
+   699                           	
+   700  0734                     l600:	
+   701  0734  1D8C               	btfss	(99/8),(99)&7
+   702  0735  2F37               	goto	u81
+   703  0736  2F38               	goto	u80
+   704  0737                     u81:
+   705  0737  2F34               	goto	l601
+   706  0738                     u80:
+   707                           	
+   708  0738                     l602:	
+   709                           	line	71
+   710                           ;I2C_driver.c: 71: SSPIF=0;
+   711  0738  118C               	bcf	(99/8),(99)&7
+   712                           	line	72
+   713                           ;I2C_driver.c: 72: return ACKSTAT;
+   714                           ;	Return value of _I2C_write_byte is never used
+   715                           	line	73
+   716                           	
+   717  0739                     l603:	
+   718  0739  0008               	return
+   719                           	opt stack 0
+   720                           GLOBAL	__end_of_I2C_write_byte
+   721  073A                     	__end_of_I2C_write_byte:
+   722 ;; =============== function _I2C_write_byte ends ============
+   723                           
+   724                           	signat	_I2C_write_byte,4217
+   725                           	global	_I2C_stop
+   726                           psect	text130,local,class=CODE,delta=2
+   727                           global __ptext130
+   728  0722                     __ptext130:
+   729                           
+   730 ;; *************** function _I2C_stop *****************
+   731 ;; Defined at:
+   732 ;;		line 45 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c"
+   733 ;; Parameters:    Size  Location     Type
+   734 ;;		None
+   735 ;; Auto vars:     Size  Location     Type
+   736 ;;		None
+   737 ;; Return value:  Size  Location     Type
+   738 ;;		None               void
+   739 ;; Registers used:
+   740 ;;		None
+   741 ;; Tracked objects:
+   742 ;;		On entry : 0/0
+   743 ;;		On exit  : 0/0
+   744 ;;		Unchanged: 0/0
+   745 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   746 ;;      Params:         0       0       0       0       0
+   747 ;;      Locals:         0       0       0       0       0
+   748 ;;      Temps:          0       0       0       0       0
+   749 ;;      Totals:         0       0       0       0       0
+   750 ;;Total ram usage:        0 bytes
+   751 ;; Hardware stack levels used:    1
+   752 ;; This function calls:
+   753 ;;		Nothing
+   754 ;; This function is called by:
+   755 ;;		_main
+   756 ;; This function uses a non-reentrant model
+   757 ;;
+   758                           psect	text130
+   759                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_
+                                 driver.c"
+   760                           	line	45
+   761                           	global	__size_of_I2C_stop
+   762  000C                     	__size_of_I2C_stop	equ	__end_of_I2C_stop-_I2C_stop
+   763                           	
+   764  0722                     _I2C_stop:	
+   765                           	opt	stack 7
+   766                           ; Regs used in _I2C_stop: []
+   767                           	line	46
+   768                           	
+   769  0722                     l2152:	
+   770                           ;I2C_driver.c: 46: PEN=1;
+   771  0722  1683               	bsf	status, 5	;RP0=1, select bank1
+   772  0723  1303               	bcf	status, 6	;RP1=0, select bank1
+   773  0724  1511               	bsf	(1162/8)^080h,(1162)&7
+   774                           	line	47
+   775                           ;I2C_driver.c: 47: while(!SSPIF);
+   776  0725  2F26               	goto	l582
+   777                           	
+   778  0726                     l583:	
+   779                           	
+   780  0726                     l582:	
+   781  0726  1283               	bcf	status, 5	;RP0=0, select bank0
+   782  0727  1303               	bcf	status, 6	;RP1=0, select bank0
+   783  0728  1D8C               	btfss	(99/8),(99)&7
+   784  0729  2F2B               	goto	u51
+   785  072A  2F2C               	goto	u50
+   786  072B                     u51:
+   787  072B  2F26               	goto	l583
+   788  072C                     u50:
+   789                           	
+   790  072C                     l584:	
+   791                           	line	48
+   792                           ;I2C_driver.c: 48: SSPIF=0;
+   793  072C  118C               	bcf	(99/8),(99)&7
+   794                           	line	49
+   795                           	
+   796  072D                     l585:	
+   797  072D  0008               	return
+   798                           	opt stack 0
+   799                           GLOBAL	__end_of_I2C_stop
+   800  072E                     	__end_of_I2C_stop:
+   801 ;; =============== function _I2C_stop ends ============
+   802                           
+   803                           	signat	_I2C_stop,88
+   804                           	global	_I2C_start
+   805                           psect	text131,local,class=CODE,delta=2
+   806                           global __ptext131
+   807  0716                     __ptext131:
+   808                           
+   809 ;; *************** function _I2C_start *****************
+   810 ;; Defined at:
+   811 ;;		line 31 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c"
+   812 ;; Parameters:    Size  Location     Type
+   813 ;;		None
+   814 ;; Auto vars:     Size  Location     Type
+   815 ;;		None
+   816 ;; Return value:  Size  Location     Type
+   817 ;;		None               void
+   818 ;; Registers used:
+   819 ;;		None
+   820 ;; Tracked objects:
+   821 ;;		On entry : 0/0
+   822 ;;		On exit  : 0/0
+   823 ;;		Unchanged: 0/0
+   824 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   825 ;;      Params:         0       0       0       0       0
+   826 ;;      Locals:         0       0       0       0       0
+   827 ;;      Temps:          0       0       0       0       0
+   828 ;;      Totals:         0       0       0       0       0
+   829 ;;Total ram usage:        0 bytes
+   830 ;; Hardware stack levels used:    1
+   831 ;; This function calls:
+   832 ;;		Nothing
+   833 ;; This function is called by:
+   834 ;;		_main
+   835 ;; This function uses a non-reentrant model
+   836 ;;
+   837                           psect	text131
+   838                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_
+                                 driver.c"
+   839                           	line	31
+   840                           	global	__size_of_I2C_start
+   841  000C                     	__size_of_I2C_start	equ	__end_of_I2C_start-_I2C_start
+   842                           	
+   843  0716                     _I2C_start:	
+   844                           	opt	stack 7
+   845                           ; Regs used in _I2C_start: []
+   846                           	line	32
+   847                           	
+   848  0716                     l2148:	
+   849                           ;I2C_driver.c: 32: SEN=1;
+   850  0716  1683               	bsf	status, 5	;RP0=1, select bank1
+   851  0717  1303               	bcf	status, 6	;RP1=0, select bank1
+   852  0718  1411               	bsf	(1160/8)^080h,(1160)&7
+   853                           	line	33
+   854                           ;I2C_driver.c: 33: while(!SSPIF);
+   855  0719  2F1A               	goto	l570
+   856                           	
+   857  071A                     l571:	
+   858                           	
+   859  071A                     l570:	
+   860  071A  1283               	bcf	status, 5	;RP0=0, select bank0
+   861  071B  1303               	bcf	status, 6	;RP1=0, select bank0
+   862  071C  1D8C               	btfss	(99/8),(99)&7
+   863  071D  2F1F               	goto	u31
+   864  071E  2F20               	goto	u30
+   865  071F                     u31:
+   866  071F  2F1A               	goto	l571
+   867  0720                     u30:
+   868                           	
+   869  0720                     l572:	
+   870                           	line	34
+   871                           ;I2C_driver.c: 34: SSPIF=0;
+   872  0720  118C               	bcf	(99/8),(99)&7
+   873                           	line	35
+   874                           	
+   875  0721                     l573:	
+   876  0721  0008               	return
+   877                           	opt stack 0
+   878                           GLOBAL	__end_of_I2C_start
+   879  0722                     	__end_of_I2C_start:
+   880 ;; =============== function _I2C_start ends ============
+   881                           
+   882                           	signat	_I2C_start,88
+   883                           	global	_I2C_master_init
+   884                           psect	text132,local,class=CODE,delta=2
+   885                           global __ptext132
+   886  073A                     __ptext132:
+   887                           
+   888 ;; *************** function _I2C_master_init *****************
+   889 ;; Defined at:
+   890 ;;		line 15 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c"
+   891 ;; Parameters:    Size  Location     Type
+   892 ;;		None
+   893 ;; Auto vars:     Size  Location     Type
+   894 ;;		None
+   895 ;; Return value:  Size  Location     Type
+   896 ;;		None               void
+   897 ;; Registers used:
+   898 ;;		wreg
+   899 ;; Tracked objects:
+   900 ;;		On entry : 0/0
+   901 ;;		On exit  : 0/0
+   902 ;;		Unchanged: 0/0
+   903 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   904 ;;      Params:         0       0       0       0       0
+   905 ;;      Locals:         0       0       0       0       0
+   906 ;;      Temps:          0       0       0       0       0
+   907 ;;      Totals:         0       0       0       0       0
+   908 ;;Total ram usage:        0 bytes
+   909 ;; Hardware stack levels used:    1
+   910 ;; This function calls:
+   911 ;;		Nothing
+   912 ;; This function is called by:
+   913 ;;		_main
+   914 ;; This function uses a non-reentrant model
+   915 ;;
+   916                           psect	text132
+   917                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_
+                                 driver.c"
+   918                           	line	15
+   919                           	global	__size_of_I2C_master_init
+   920  000D                     	__size_of_I2C_master_init	equ	__end_of_I2C_master_init-_I2C_master_init
+   921                           	
+   922  073A                     _I2C_master_init:	
+   923                           	opt	stack 7
+   924                           ; Regs used in _I2C_master_init: [wreg]
+   925                           	line	16
+   926                           	
+   927  073A                     l2144:	
+   928                           ;I2C_driver.c: 16: TRISC=0X18;
+   929  073A  3018               	movlw	(018h)
+   930  073B  1683               	bsf	status, 5	;RP0=1, select bank1
+   931  073C  1303               	bcf	status, 6	;RP1=0, select bank1
+   932  073D  0087               	movwf	(135)^080h	;volatile
+   933                           	line	17
+   934                           ;I2C_driver.c: 17: SSPADD=9;
+   935  073E  3009               	movlw	(09h)
+   936  073F  0093               	movwf	(147)^080h	;volatile
+   937                           	line	18
+   938                           ;I2C_driver.c: 18: SSPSTAT=0X80;
+   939  0740  3080               	movlw	(080h)
+   940  0741  0094               	movwf	(148)^080h	;volatile
+   941                           	line	19
+   942                           ;I2C_driver.c: 19: SSPCON=0X38;
+   943  0742  3038               	movlw	(038h)
+   944  0743  1283               	bcf	status, 5	;RP0=0, select bank0
+   945  0744  1303               	bcf	status, 6	;RP1=0, select bank0
+   946  0745  0094               	movwf	(20)	;volatile
+   947                           	line	20
+   948                           	
+   949  0746                     l564:	
+   950  0746  0008               	return
+   951                           	opt stack 0
+   952                           GLOBAL	__end_of_I2C_master_init
+   953  0747                     	__end_of_I2C_master_init:
+   954 ;; =============== function _I2C_master_init ends ============
+   955                           
+   956                           	signat	_I2C_master_init,88
+   957                           	global	_delay1
+   958                           psect	text133,local,class=CODE,delta=2
+   959                           global __ptext133
+   960  0747                     __ptext133:
+   961                           
+   962 ;; *************** function _delay1 *****************
+   963 ;; Defined at:
+   964 ;;		line 9 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c"
+   965 ;; Parameters:    Size  Location     Type
+   966 ;;		None
+   967 ;; Auto vars:     Size  Location     Type
+   968 ;;  i               2    0[COMMON] unsigned int 
+   969 ;; Return value:  Size  Location     Type
+   970 ;;		None               void
+   971 ;; Registers used:
+   972 ;;		wreg
+   973 ;; Tracked objects:
+   974 ;;		On entry : 0/0
+   975 ;;		On exit  : 0/0
+   976 ;;		Unchanged: 0/0
+   977 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   978 ;;      Params:         0       0       0       0       0
+   979 ;;      Locals:         2       0       0       0       0
+   980 ;;      Temps:          0       0       0       0       0
+   981 ;;      Totals:         2       0       0       0       0
+   982 ;;Total ram usage:        2 bytes
+   983 ;; Hardware stack levels used:    1
+   984 ;; This function calls:
+   985 ;;		Nothing
+   986 ;; This function is called by:
+   987 ;;		_I2C_write_string
+   988 ;; This function uses a non-reentrant model
+   989 ;;
+   990                           psect	text133
+   991                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_
+                                 driver.c"
+   992                           	line	9
+   993                           	global	__size_of_delay1
+   994  001E                     	__size_of_delay1	equ	__end_of_delay1-_delay1
+   995                           	
+   996  0747                     _delay1:	
+   997                           	opt	stack 6
+   998                           ; Regs used in _delay1: [wreg]
+   999                           	line	11
+  1000                           	
+  1001  0747                     l2138:	
+  1002                           ;I2C_driver.c: 10: unsigned int i;
+  1003                           ;I2C_driver.c: 11: for(i=0;i<10000;i++);
+  1004  0747  3000               	movlw	low(0)
+  1005  0748  00F0               	movwf	(delay1@i)
+  1006  0749  3000               	movlw	high(0)
+  1007  074A  00F1               	movwf	((delay1@i))+1
+  1008  074B  3027               	movlw	high(02710h)
+  1009  074C  0271               	subwf	(delay1@i+1),w
+  1010  074D  3010               	movlw	low(02710h)
+  1011  074E  1903               	skipnz
+  1012  074F  0270               	subwf	(delay1@i),w
+  1013  0750  1C03               	skipc
+  1014  0751  2F53               	goto	u11
+  1015  0752  2F54               	goto	u10
+  1016  0753                     u11:
+  1017  0753  2F55               	goto	l559
+  1018  0754                     u10:
+  1019                           	
+  1020  0754                     l2140:	
+  1021  0754  2F64               	goto	l560
+  1022                           	
+  1023  0755                     l559:	
+  1024                           	
+  1025  0755                     l2142:	
+  1026  0755  3001               	movlw	low(01h)
+  1027  0756  07F0               	addwf	(delay1@i),f
+  1028  0757  1803               	skipnc
+  1029  0758  0AF1               	incf	(delay1@i+1),f
+  1030  0759  3000               	movlw	high(01h)
+  1031  075A  07F1               	addwf	(delay1@i+1),f
+  1032  075B  3027               	movlw	high(02710h)
+  1033  075C  0271               	subwf	(delay1@i+1),w
+  1034  075D  3010               	movlw	low(02710h)
+  1035  075E  1903               	skipnz
+  1036  075F  0270               	subwf	(delay1@i),w
+  1037  0760  1C03               	skipc
+  1038  0761  2F63               	goto	u21
+  1039  0762  2F64               	goto	u20
+  1040  0763                     u21:
+  1041  0763  2F55               	goto	l559
+  1042  0764                     u20:
+  1043                           	
+  1044  0764                     l560:	
+  1045                           	line	12
+  1046                           	
+  1047  0764                     l561:	
+  1048  0764  0008               	return
+  1049                           	opt stack 0
+  1050                           GLOBAL	__end_of_delay1
+  1051  0765                     	__end_of_delay1:
+  1052 ;; =============== function _delay1 ends ============
+  1053                           
+  1054                           	signat	_delay1,88
+  1055                           psect	text134,local,class=CODE,delta=2
+  1056                           global __ptext134
+  1057  0000                     __ptext134:
+  1058                           	global	btemp
+  1059  007E                     	btemp set 07Eh
+  1060                           
+  1061                           	DABS	1,126,2	;btemp
+  1062                           	global	wtemp0
+  1063  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.71a build 6446 
+Symbol Table                                                                                   Fri Oct 23 18:37:01 2020
+
+                        pc 0002                         u10 0754                         u11 0753  
+                       u20 0764                         u21 0763                         u30 0720  
+                       u31 071F                         u50 072C                         u51 072B  
+                       u80 0738                         u81 0737                         fsr 0004  
+       __size_of_I2C_start 000C                        l600 0734                        l601 0734  
+                      l602 0738                        l603 0739                        l612 079A  
+                      l613 0785                        l614 07A6                        l615 07A6  
+                      l560 0764                        l561 0764                        l570 071A  
+                      l571 071A                        l564 0746                        l572 0720  
+                      l573 0721                        l582 0726                        l559 0755  
+                      l583 0726                        l584 072C                        l585 072D  
+                      _RE0 0048                        _RE2 004A                        u110 0772  
+                      u111 0771                        u120 0782                        u121 0781  
+                      _PEN 048A                        _SEN 0488                        fsr0 0004  
+                     l3000 0785                       l2210 0773                       l3002 0791  
+                     l3010 07B1                       l2140 0754                       l3004 0795  
+                     l3020 07CC                       l3012 07B6                       l2142 0755  
+                     l2206 0765                       l3006 079A                       l3030 07E7  
+                     l3022 07D1                       l3014 07BB                       l2144 073A  
+                     l2152 0722                       l2208 0772                       l3032 07ED  
+                     l3024 07D7                       l3016 07C1                       l3008 07A7  
+                     l2138 0747                       l3034 07F2                       l3026 07DC  
+                     l3018 07C6                       l2148 0716                       l3036 07F7  
+                     l3028 07E2                       l2158 072F                       l1762 07FC  
+                     l1763 07FC                       l1764 07FD                       l1757 0773  
+                     l1765 07FD                       l1758 0782                       l1759 0782  
+                     l2998 0784                       STR_1 0009                       u2260 07A6  
+                     u2261 07A5                       _RCEN 048B                       _RSEN 0489  
+                     _main 07A7                       btemp 007E                       start 0000  
+         __end_of_I2C_stop 072E  __size_of_I2C_write_string 0024                      ?_main 0070  
+                    _ACKEN 048C                      _ACKDT 048D                      _PORTB 0006  
+                    _PORTE 0009                      _TRISB 0086                      _TRISC 0087  
+                    _TRISE 0089                      _SSPIF 0063                      _delay 0765  
+                    pclath 000A                      status 0003          __end_of_I2C_start 0722  
+                    wtemp0 007E          ??_I2C_master_init 0070               __end_of_main 0800  
+                   ??_main 0074                     ?_delay 0070                     _ADCON1 009F  
+                   _SSPADD 0093                     _SSPCON 0014                     _SSPBUF 0013  
+         ??_I2C_write_byte 0070                     _delay1 0747                     delay@i 0070  
+                ?_I2C_stop 0070             __pcstackCOMMON 0070              __end_of_delay 0783  
+         _I2C_write_string 0783                 ??_I2C_stop 0070                    ??_delay 0070  
+               __pmaintext 07A7                    ?_delay1 0070                    _ACKSTAT 048E  
+          _I2C_master_init 073A                    _SSPSTAT 0094                  _I2C_start 0716  
+          __size_of_delay1 001E                    delay1@i 0070       end_of_initialization 0712  
+               ?_I2C_start 0070    __end_of_I2C_master_init 0747          __size_of_I2C_stop 000C  
+ __end_of_I2C_write_string 07A7             __end_of_delay1 0765        start_initialization 0712  
+              ??_I2C_start 0070                   ??_delay1 0070       I2C_write_string@data 0073  
+  __size_of_I2C_write_byte 000C           ?_I2C_master_init 0070                  __ptext130 0722  
+                __ptext131 0716                  __ptext132 073A                  __ptext133 0747  
+                __ptext134 0000                  __ptext126 0000                  __ptext127 0783  
+                __ptext128 0765                  __ptext129 072E                  __pstrings 0003  
+                 _I2C_stop 0722             __size_of_delay 001E                __stringbase 0008  
+        ?_I2C_write_string 0070         ??_I2C_write_string 0072             _I2C_write_byte 072E  
+       I2C_write_byte@byte 0070              __size_of_main 0059     __end_of_I2C_write_byte 073A  
+                stringcode 0003            ?_I2C_write_byte 0070                   stringdir 0003  
+                 stringtab 0003   __size_of_I2C_master_init 000D  

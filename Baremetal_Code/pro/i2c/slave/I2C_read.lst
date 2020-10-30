@@ -1,0 +1,1000 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.71a build 6446 
+                                                                                               Fri Oct 23 18:42:43 2020
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 6446
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 6446"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_I2C_slave_init
+    43                           	FNCALL	_main,_lcd_init
+    44                           	FNCALL	_main,_delay
+    45                           	FNCALL	_main,_I2C_read_byte
+    46                           	FNCALL	_main,_lcd_char
+    47                           	FNCALL	_lcd_init,_lcd_cmd
+    48                           	FNROOT	_main
+    49                           	global	_PORTB
+    50                           psect	text127,local,class=CODE,delta=2
+    51                           global __ptext127
+    52  0000                     __ptext127:
+    53  0006                     _PORTB	set	6
+    54                           	global	_PORTE
+    55  0009                     _PORTE	set	9
+    56                           	global	_SSPBUF
+    57  0013                     _SSPBUF	set	19
+    58                           	global	_SSPCON
+    59  0014                     _SSPCON	set	20
+    60                           	global	_RE0
+    61  0048                     _RE0	set	72
+    62                           	global	_RE2
+    63  004A                     _RE2	set	74
+    64                           	global	_SSPIF
+    65  0063                     _SSPIF	set	99
+    66                           	global	_ADCON1
+    67  009F                     _ADCON1	set	159
+    68                           	global	_SSPADD
+    69  0093                     _SSPADD	set	147
+    70                           	global	_SSPSTAT
+    71  0094                     _SSPSTAT	set	148
+    72                           	global	_TRISB
+    73  0086                     _TRISB	set	134
+    74                           	global	_TRISC
+    75  0087                     _TRISC	set	135
+    76                           	global	_TRISE
+    77  0089                     _TRISE	set	137
+    78                           	global	_ACKDT
+    79  048D                     _ACKDT	set	1165
+    80                           	global	_ACKEN
+    81  048C                     _ACKEN	set	1164
+    82                           	global	_ACKSTAT
+    83  048E                     _ACKSTAT	set	1166
+    84                           	global	_PEN
+    85  048A                     _PEN	set	1162
+    86                           	global	_RCEN
+    87  048B                     _RCEN	set	1163
+    88                           	global	_RSEN
+    89  0489                     _RSEN	set	1161
+    90                           	global	_SEN
+    91  0488                     _SEN	set	1160
+    92                           	file	"I2C_read.as"
+    93                           	line	#
+    94                           psect cinit,class=CODE,delta=2
+    95                           global start_initialization
+    96  0750                     start_initialization:
+    97                           
+    98                           psect cinit,class=CODE,delta=2
+    99                           global end_of_initialization
+   100                           
+   101                           ;End of C runtime variable initialization code
+   102                           
+   103  0750                     end_of_initialization:
+   104  0750  0183               clrf status
+   105  0751  120A  118A  2FD5   ljmp _main	;jump to C main() function
+   106                           psect	cstackCOMMON,class=COMMON,space=1
+   107                           global __pcstackCOMMON
+   108  0070                     __pcstackCOMMON:
+   109                           	global	?_I2C_slave_init
+   110  0070                     ?_I2C_slave_init:	; 0 bytes @ 0x0
+   111                           	global	??_I2C_slave_init
+   112  0070                     ??_I2C_slave_init:	; 0 bytes @ 0x0
+   113                           	global	?_lcd_init
+   114  0070                     ?_lcd_init:	; 0 bytes @ 0x0
+   115                           	global	??_I2C_read_byte
+   116  0070                     ??_I2C_read_byte:	; 0 bytes @ 0x0
+   117                           	global	?_lcd_char
+   118  0070                     ?_lcd_char:	; 0 bytes @ 0x0
+   119                           	global	??_lcd_char
+   120  0070                     ??_lcd_char:	; 0 bytes @ 0x0
+   121                           	global	?_delay
+   122  0070                     ?_delay:	; 0 bytes @ 0x0
+   123                           	global	??_delay
+   124  0070                     ??_delay:	; 0 bytes @ 0x0
+   125                           	global	?_main
+   126  0070                     ?_main:	; 0 bytes @ 0x0
+   127                           	global	?_lcd_cmd
+   128  0070                     ?_lcd_cmd:	; 0 bytes @ 0x0
+   129                           	global	??_lcd_cmd
+   130  0070                     ??_lcd_cmd:	; 0 bytes @ 0x0
+   131                           	global	?_I2C_read_byte
+   132  0070                     ?_I2C_read_byte:	; 1 bytes @ 0x0
+   133                           	global	delay@i
+   134  0070                     delay@i:	; 2 bytes @ 0x0
+   135  0070                     	ds	2
+   136                           	global	lcd_cmd@cmd
+   137  0072                     lcd_cmd@cmd:	; 1 bytes @ 0x2
+   138                           	global	lcd_char@data
+   139  0072                     lcd_char@data:	; 1 bytes @ 0x2
+   140  0072                     	ds	1
+   141                           	global	??_lcd_init
+   142  0073                     ??_lcd_init:	; 0 bytes @ 0x3
+   143                           	global	??_main
+   144  0073                     ??_main:	; 0 bytes @ 0x3
+   145  0073                     	ds	1
+   146                           	global	main@temp
+   147  0074                     main@temp:	; 1 bytes @ 0x4
+   148  0074                     	ds	1
+   149 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+   150 ;;Auto spaces:   Size  Autos    Used
+   151 ;; COMMON          14      5       5
+   152 ;; BANK0           80      0       0
+   153 ;; BANK1           80      0       0
+   154 ;; BANK3           96      0       0
+   155 ;; BANK2           96      0       0
+   156                           
+   157 ;;
+   158 ;; Pointer list with targets:
+   159                           
+   160                           
+   161                           
+   162 ;;
+   163 ;; Critical Paths under _main in COMMON
+   164 ;;
+   165 ;;   _main->_lcd_char
+   166 ;;   _lcd_init->_lcd_cmd
+   167 ;;
+   168 ;; Critical Paths under _main in BANK0
+   169 ;;
+   170 ;;   None.
+   171 ;;
+   172 ;; Critical Paths under _main in BANK1
+   173 ;;
+   174 ;;   None.
+   175 ;;
+   176 ;; Critical Paths under _main in BANK3
+   177 ;;
+   178 ;;   None.
+   179 ;;
+   180 ;; Critical Paths under _main in BANK2
+   181 ;;
+   182 ;;   None.
+   183                           
+   184 ;;
+   185 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   186 ;;
+   187                           
+   188 ;;
+   189 ;;Call Graph Tables:
+   190 ;;
+   191 ;; ---------------------------------------------------------------------------------
+   192 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   193 ;; ---------------------------------------------------------------------------------
+   194 ;; (0) _main                                                 2     2      0      75
+   195 ;;                                              3 COMMON     2     2      0
+   196 ;;                     _I2C_slave_init
+   197 ;;                           _lcd_init
+   198 ;;                              _delay
+   199 ;;                      _I2C_read_byte
+   200 ;;                           _lcd_char
+   201 ;; ---------------------------------------------------------------------------------
+   202 ;; (1) _lcd_init                                             0     0      0      15
+   203 ;;                            _lcd_cmd
+   204 ;; ---------------------------------------------------------------------------------
+   205 ;; (2) _lcd_cmd                                              3     3      0      15
+   206 ;;                                              0 COMMON     3     3      0
+   207 ;; ---------------------------------------------------------------------------------
+   208 ;; (1) _lcd_char                                             3     3      0      15
+   209 ;;                                              0 COMMON     3     3      0
+   210 ;; ---------------------------------------------------------------------------------
+   211 ;; (1) _I2C_read_byte                                        0     0      0       0
+   212 ;; ---------------------------------------------------------------------------------
+   213 ;; (1) _I2C_slave_init                                       0     0      0       0
+   214 ;; ---------------------------------------------------------------------------------
+   215 ;; (1) _delay                                                2     2      0      30
+   216 ;;                                              0 COMMON     2     2      0
+   217 ;; ---------------------------------------------------------------------------------
+   218 ;; Estimated maximum stack depth 2
+   219 ;; ---------------------------------------------------------------------------------
+   220                           
+   221 ;; Call Graph Graphs:
+   222                           
+   223 ;; _main (ROOT)
+   224 ;;   _I2C_slave_init
+   225 ;;   _lcd_init
+   226 ;;     _lcd_cmd
+   227 ;;   _delay
+   228 ;;   _I2C_read_byte
+   229 ;;   _lcd_char
+   230 ;;
+   231                           
+   232 ;; Address spaces:
+   233                           
+   234 ;;Name               Size   Autos  Total    Cost      Usage
+   235 ;;BITCOMMON            E      0       0       0        0.0%
+   236 ;;EEDATA             100      0       0       0        0.0%
+   237 ;;NULL                 0      0       0       0        0.0%
+   238 ;;CODE                 0      0       0       0        0.0%
+   239 ;;COMMON               E      5       5       1       35.7%
+   240 ;;BITSFR0              0      0       0       1        0.0%
+   241 ;;SFR0                 0      0       0       1        0.0%
+   242 ;;BITSFR1              0      0       0       2        0.0%
+   243 ;;SFR1                 0      0       0       2        0.0%
+   244 ;;STACK                0      0       2       2        0.0%
+   245 ;;ABS                  0      0       0       3        0.0%
+   246 ;;BITBANK0            50      0       0       4        0.0%
+   247 ;;BITSFR3              0      0       0       4        0.0%
+   248 ;;SFR3                 0      0       0       4        0.0%
+   249 ;;BANK0               50      0       0       5        0.0%
+   250 ;;BITSFR2              0      0       0       5        0.0%
+   251 ;;SFR2                 0      0       0       5        0.0%
+   252 ;;BITBANK1            50      0       0       6        0.0%
+   253 ;;BANK1               50      0       0       7        0.0%
+   254 ;;BITBANK3            60      0       0       8        0.0%
+   255 ;;BANK3               60      0       0       9        0.0%
+   256 ;;BITBANK2            60      0       0      10        0.0%
+   257 ;;BANK2               60      0       0      11        0.0%
+   258 ;;DATA                 0      0       0      12        0.0%
+   259                           
+   260                           	global	_main
+   261                           psect	maintext,global,class=CODE,delta=2
+   262                           global __pmaintext
+   263  07D5                     __pmaintext:
+   264                           
+   265 ;; *************** function _main *****************
+   266 ;; Defined at:
+   267 ;;		line 12 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_slave.c"
+   268 ;; Parameters:    Size  Location     Type
+   269 ;;		None
+   270 ;; Auto vars:     Size  Location     Type
+   271 ;;  temp            1    4[COMMON] unsigned char 
+   272 ;; Return value:  Size  Location     Type
+   273 ;;		None               void
+   274 ;; Registers used:
+   275 ;;		wreg, status,2, status,0, pclath, cstack
+   276 ;; Tracked objects:
+   277 ;;		On entry : 17F/0
+   278 ;;		On exit  : 0/0
+   279 ;;		Unchanged: 0/0
+   280 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   281 ;;      Params:         0       0       0       0       0
+   282 ;;      Locals:         1       0       0       0       0
+   283 ;;      Temps:          1       0       0       0       0
+   284 ;;      Totals:         2       0       0       0       0
+   285 ;;Total ram usage:        2 bytes
+   286 ;; Hardware stack levels required when called:    2
+   287 ;; This function calls:
+   288 ;;		_I2C_slave_init
+   289 ;;		_lcd_init
+   290 ;;		_delay
+   291 ;;		_I2C_read_byte
+   292 ;;		_lcd_char
+   293 ;; This function is called by:
+   294 ;;		Startup code after reset
+   295 ;; This function uses a non-reentrant model
+   296 ;;
+   297                           psect	maintext
+   298                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_slave.c"
+   299                           	line	12
+   300                           	global	__size_of_main
+   301  002B                     	__size_of_main	equ	__end_of_main-_main
+   302                           	
+   303  07D5                     _main:	
+   304                           	opt	stack 8
+   305                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   306                           	line	13
+   307                           	
+   308  07D5                     l3000:	
+   309                           ;i2c_slave.c: 13: unsigned char temp=0;
+   310  07D5  1003               	clrc
+   311  07D6  3000               	movlw	0
+   312  07D7  1803               	btfsc	status,0
+   313  07D8  3001               	movlw	1
+   314  07D9  00F4               	movwf	(main@temp)
+   315                           	line	15
+   316                           	
+   317  07DA                     l3002:	
+   318                           ;i2c_slave.c: 15: I2C_slave_init();
+   319  07DA  120A  118A  2754   	fcall	_I2C_slave_init
+              120A  118A         
+   320                           	line	17
+   321                           	
+   322  07DF                     l3004:	
+   323                           ;i2c_slave.c: 17: lcd_init();
+   324  07DF  120A  118A  27B4   	fcall	_lcd_init
+              120A  118A         
+   325                           	line	19
+   326                           	
+   327  07E4                     l3006:	
+   328                           ;i2c_slave.c: 19: delay();
+   329  07E4  120A  118A  2796   	fcall	_delay
+              120A  118A         
+   330                           	line	22
+   331                           ;i2c_slave.c: 22: while(1)
+   332                           	
+   333  07E9                     l572:	
+   334                           	line	25
+   335                           	
+   336  07E9                     l3008:	
+   337                           ;i2c_slave.c: 23: {
+   338                           ;i2c_slave.c: 25: temp=(unsigned char)I2C_read_byte();
+   339  07E9  120A  118A  2761   	fcall	_I2C_read_byte
+              120A  118A         
+   340  07EE  00F3               	movwf	(??_main+0)+0
+   341  07EF  0873               	movf	(??_main+0)+0,w
+   342  07F0  00F4               	movwf	(main@temp)
+   343                           	line	26
+   344                           	
+   345  07F1                     l3010:	
+   346                           ;i2c_slave.c: 26: delay();
+   347  07F1  120A  118A  2796   	fcall	_delay
+              120A  118A         
+   348                           	line	27
+   349                           	
+   350  07F6                     l3012:	
+   351                           ;i2c_slave.c: 27: lcd_char(temp);
+   352  07F6  0874               	movf	(main@temp),w
+   353  07F7  120A  118A  276E   	fcall	_lcd_char
+              120A  118A         
+   354                           	line	29
+   355                           	
+   356  07FC                     l573:	
+   357                           	line	22
+   358  07FC  2FE9               	goto	l572
+   359                           	
+   360  07FD                     l574:	
+   361                           	line	32
+   362                           	
+   363  07FD                     l575:	
+   364                           	global	start
+   365  07FD  120A  118A  2800   	ljmp	start
+   366                           	opt stack 0
+   367                           GLOBAL	__end_of_main
+   368  0800                     	__end_of_main:
+   369 ;; =============== function _main ends ============
+   370                           
+   371                           	signat	_main,88
+   372                           	global	_lcd_init
+   373                           psect	text128,local,class=CODE,delta=2
+   374                           global __ptext128
+   375  07B4                     __ptext128:
+   376                           
+   377 ;; *************** function _lcd_init *****************
+   378 ;; Defined at:
+   379 ;;		line 38 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\lcd\src\lcd_driver.c"
+   380 ;; Parameters:    Size  Location     Type
+   381 ;;		None
+   382 ;; Auto vars:     Size  Location     Type
+   383 ;;		None
+   384 ;; Return value:  Size  Location     Type
+   385 ;;		None               void
+   386 ;; Registers used:
+   387 ;;		wreg, status,2, status,0, pclath, cstack
+   388 ;; Tracked objects:
+   389 ;;		On entry : 0/0
+   390 ;;		On exit  : 0/0
+   391 ;;		Unchanged: 0/0
+   392 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   393 ;;      Params:         0       0       0       0       0
+   394 ;;      Locals:         0       0       0       0       0
+   395 ;;      Temps:          0       0       0       0       0
+   396 ;;      Totals:         0       0       0       0       0
+   397 ;;Total ram usage:        0 bytes
+   398 ;; Hardware stack levels used:    1
+   399 ;; Hardware stack levels required when called:    1
+   400 ;; This function calls:
+   401 ;;		_lcd_cmd
+   402 ;; This function is called by:
+   403 ;;		_main
+   404 ;; This function uses a non-reentrant model
+   405 ;;
+   406                           psect	text128
+   407                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\lcd\src\lcd_
+                                 driver.c"
+   408                           	line	38
+   409                           	global	__size_of_lcd_init
+   410  0021                     	__size_of_lcd_init	equ	__end_of_lcd_init-_lcd_init
+   411                           	
+   412  07B4                     _lcd_init:	
+   413                           	opt	stack 7
+   414                           ; Regs used in _lcd_init: [wreg+status,2+status,0+pclath+cstack]
+   415                           	line	39
+   416                           	
+   417  07B4                     l2984:	
+   418                           ;lcd_driver.c: 39: ADCON1=0x06;
+   419  07B4  3006               	movlw	(06h)
+   420  07B5  1683               	bsf	status, 5	;RP0=1, select bank1
+   421  07B6  1303               	bcf	status, 6	;RP1=0, select bank1
+   422  07B7  009F               	movwf	(159)^080h	;volatile
+   423                           	line	40
+   424                           	
+   425  07B8                     l2986:	
+   426                           ;lcd_driver.c: 40: TRISB=0X00;
+   427  07B8  0186               	clrf	(134)^080h	;volatile
+   428                           	line	41
+   429                           	
+   430  07B9                     l2988:	
+   431                           ;lcd_driver.c: 41: PORTB=0X00;
+   432  07B9  1283               	bcf	status, 5	;RP0=0, select bank0
+   433  07BA  1303               	bcf	status, 6	;RP1=0, select bank0
+   434  07BB  0186               	clrf	(6)	;volatile
+   435                           	line	42
+   436                           	
+   437  07BC                     l2990:	
+   438                           ;lcd_driver.c: 42: TRISE=0X00;
+   439  07BC  1683               	bsf	status, 5	;RP0=1, select bank1
+   440  07BD  1303               	bcf	status, 6	;RP1=0, select bank1
+   441  07BE  0189               	clrf	(137)^080h	;volatile
+   442                           	line	43
+   443                           	
+   444  07BF                     l2992:	
+   445                           ;lcd_driver.c: 43: PORTE=0X00;
+   446  07BF  1283               	bcf	status, 5	;RP0=0, select bank0
+   447  07C0  1303               	bcf	status, 6	;RP1=0, select bank0
+   448  07C1  0189               	clrf	(9)	;volatile
+   449                           	line	44
+   450                           	
+   451  07C2                     l2994:	
+   452                           ;lcd_driver.c: 44: lcd_cmd(0x38);
+   453  07C2  3038               	movlw	(038h)
+   454  07C3  120A  118A  2782   	fcall	_lcd_cmd
+              120A  118A         
+   455                           	line	45
+   456                           	
+   457  07C8                     l2996:	
+   458                           ;lcd_driver.c: 45: lcd_cmd(0x0c);
+   459  07C8  300C               	movlw	(0Ch)
+   460  07C9  120A  118A  2782   	fcall	_lcd_cmd
+              120A  118A         
+   461                           	line	46
+   462                           	
+   463  07CE                     l2998:	
+   464                           ;lcd_driver.c: 46: lcd_cmd(0x80);
+   465  07CE  3080               	movlw	(080h)
+   466  07CF  120A  118A  2782   	fcall	_lcd_cmd
+              120A  118A         
+   467                           	line	47
+   468                           	
+   469  07D4                     l1148:	
+   470  07D4  0008               	return
+   471                           	opt stack 0
+   472                           GLOBAL	__end_of_lcd_init
+   473  07D5                     	__end_of_lcd_init:
+   474 ;; =============== function _lcd_init ends ============
+   475                           
+   476                           	signat	_lcd_init,88
+   477                           	global	_lcd_cmd
+   478                           psect	text129,local,class=CODE,delta=2
+   479                           global __ptext129
+   480  0782                     __ptext129:
+   481                           
+   482 ;; *************** function _lcd_cmd *****************
+   483 ;; Defined at:
+   484 ;;		line 9 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\lcd\src\lcd_driver.c"
+   485 ;; Parameters:    Size  Location     Type
+   486 ;;  cmd             1    wreg     unsigned char 
+   487 ;; Auto vars:     Size  Location     Type
+   488 ;;  cmd             1    2[COMMON] unsigned char 
+   489 ;; Return value:  Size  Location     Type
+   490 ;;		None               void
+   491 ;; Registers used:
+   492 ;;		wreg
+   493 ;; Tracked objects:
+   494 ;;		On entry : 0/0
+   495 ;;		On exit  : 0/0
+   496 ;;		Unchanged: 0/0
+   497 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   498 ;;      Params:         0       0       0       0       0
+   499 ;;      Locals:         1       0       0       0       0
+   500 ;;      Temps:          2       0       0       0       0
+   501 ;;      Totals:         3       0       0       0       0
+   502 ;;Total ram usage:        3 bytes
+   503 ;; Hardware stack levels used:    1
+   504 ;; This function calls:
+   505 ;;		Nothing
+   506 ;; This function is called by:
+   507 ;;		_lcd_init
+   508 ;; This function uses a non-reentrant model
+   509 ;;
+   510                           psect	text129
+   511                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\lcd\src\lcd_
+                                 driver.c"
+   512                           	line	9
+   513                           	global	__size_of_lcd_cmd
+   514  0014                     	__size_of_lcd_cmd	equ	__end_of_lcd_cmd-_lcd_cmd
+   515                           	
+   516  0782                     _lcd_cmd:	
+   517                           	opt	stack 6
+   518                           ; Regs used in _lcd_cmd: [wreg]
+   519                           ;lcd_cmd@cmd stored from wreg
+   520  0782  00F2               	movwf	(lcd_cmd@cmd)
+   521                           	line	10
+   522                           	
+   523  0783                     l2976:	
+   524                           ;lcd_driver.c: 10: RE0=0;
+   525  0783  1283               	bcf	status, 5	;RP0=0, select bank0
+   526  0784  1303               	bcf	status, 6	;RP1=0, select bank0
+   527  0785  1009               	bcf	(72/8),(72)&7
+   528                           	line	11
+   529                           	
+   530  0786                     l2978:	
+   531                           ;lcd_driver.c: 11: PORTB=cmd;
+   532  0786  0872               	movf	(lcd_cmd@cmd),w
+   533  0787  0086               	movwf	(6)	;volatile
+   534                           	line	12
+   535                           	
+   536  0788                     l2980:	
+   537                           ;lcd_driver.c: 12: RE2=1;
+   538  0788  1509               	bsf	(74/8),(74)&7
+   539                           	line	13
+   540                           ;lcd_driver.c: 13: _delay((unsigned long)((1)*(40000000/4000.0)));
+   541                           	opt asmopt_off
+   542  0789  300D               movlw	13
+   543  078A  00F1               movwf	((??_lcd_cmd+0)+0+1),f
+   544  078B  30FB               	movlw	251
+   545  078C  00F0               movwf	((??_lcd_cmd+0)+0),f
+   546  078D                     u2277:
+   547  078D  0BF0               	decfsz	((??_lcd_cmd+0)+0),f
+   548  078E  2F8D               	goto	u2277
+   549  078F  0BF1               	decfsz	((??_lcd_cmd+0)+0+1),f
+   550  0790  2F8D               	goto	u2277
+   551  0791  2F92               	nop2
+   552                           opt asmopt_on
+   553                           
+   554                           	line	14
+   555                           	
+   556  0792                     l2982:	
+   557                           ;lcd_driver.c: 14: RE2=0;
+   558  0792  1283               	bcf	status, 5	;RP0=0, select bank0
+   559  0793  1303               	bcf	status, 6	;RP1=0, select bank0
+   560  0794  1109               	bcf	(74/8),(74)&7
+   561                           	line	15
+   562                           	
+   563  0795                     l1136:	
+   564  0795  0008               	return
+   565                           	opt stack 0
+   566                           GLOBAL	__end_of_lcd_cmd
+   567  0796                     	__end_of_lcd_cmd:
+   568 ;; =============== function _lcd_cmd ends ============
+   569                           
+   570                           	signat	_lcd_cmd,4216
+   571                           	global	_lcd_char
+   572                           psect	text130,local,class=CODE,delta=2
+   573                           global __ptext130
+   574  076E                     __ptext130:
+   575                           
+   576 ;; *************** function _lcd_char *****************
+   577 ;; Defined at:
+   578 ;;		line 18 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\lcd\src\lcd_driver.c"
+   579 ;; Parameters:    Size  Location     Type
+   580 ;;  data            1    wreg     unsigned char 
+   581 ;; Auto vars:     Size  Location     Type
+   582 ;;  data            1    2[COMMON] unsigned char 
+   583 ;; Return value:  Size  Location     Type
+   584 ;;		None               void
+   585 ;; Registers used:
+   586 ;;		wreg
+   587 ;; Tracked objects:
+   588 ;;		On entry : 0/0
+   589 ;;		On exit  : 0/0
+   590 ;;		Unchanged: 0/0
+   591 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   592 ;;      Params:         0       0       0       0       0
+   593 ;;      Locals:         1       0       0       0       0
+   594 ;;      Temps:          2       0       0       0       0
+   595 ;;      Totals:         3       0       0       0       0
+   596 ;;Total ram usage:        3 bytes
+   597 ;; Hardware stack levels used:    1
+   598 ;; This function calls:
+   599 ;;		Nothing
+   600 ;; This function is called by:
+   601 ;;		_main
+   602 ;;		_lcd_string
+   603 ;; This function uses a non-reentrant model
+   604 ;;
+   605                           psect	text130
+   606                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\lcd\src\lcd_
+                                 driver.c"
+   607                           	line	18
+   608                           	global	__size_of_lcd_char
+   609  0014                     	__size_of_lcd_char	equ	__end_of_lcd_char-_lcd_char
+   610                           	
+   611  076E                     _lcd_char:	
+   612                           	opt	stack 7
+   613                           ; Regs used in _lcd_char: [wreg]
+   614                           ;lcd_char@data stored from wreg
+   615                           	line	20
+   616  076E  00F2               	movwf	(lcd_char@data)
+   617                           	
+   618  076F                     l2968:	
+   619                           ;lcd_driver.c: 20: RE0=1;
+   620  076F  1283               	bcf	status, 5	;RP0=0, select bank0
+   621  0770  1303               	bcf	status, 6	;RP1=0, select bank0
+   622  0771  1409               	bsf	(72/8),(72)&7
+   623                           	line	21
+   624                           	
+   625  0772                     l2970:	
+   626                           ;lcd_driver.c: 21: PORTB=data;
+   627  0772  0872               	movf	(lcd_char@data),w
+   628  0773  0086               	movwf	(6)	;volatile
+   629                           	line	22
+   630                           	
+   631  0774                     l2972:	
+   632                           ;lcd_driver.c: 22: RE2=1;
+   633  0774  1509               	bsf	(74/8),(74)&7
+   634                           	line	23
+   635                           ;lcd_driver.c: 23: _delay((unsigned long)((1)*(40000000/4000.0)));
+   636                           	opt asmopt_off
+   637  0775  300D               movlw	13
+   638  0776  00F1               movwf	((??_lcd_char+0)+0+1),f
+   639  0777  30FB               	movlw	251
+   640  0778  00F0               movwf	((??_lcd_char+0)+0),f
+   641  0779                     u2287:
+   642  0779  0BF0               	decfsz	((??_lcd_char+0)+0),f
+   643  077A  2F79               	goto	u2287
+   644  077B  0BF1               	decfsz	((??_lcd_char+0)+0+1),f
+   645  077C  2F79               	goto	u2287
+   646  077D  2F7E               	nop2
+   647                           opt asmopt_on
+   648                           
+   649                           	line	24
+   650                           	
+   651  077E                     l2974:	
+   652                           ;lcd_driver.c: 24: RE2=0;
+   653  077E  1283               	bcf	status, 5	;RP0=0, select bank0
+   654  077F  1303               	bcf	status, 6	;RP1=0, select bank0
+   655  0780  1109               	bcf	(74/8),(74)&7
+   656                           	line	26
+   657                           	
+   658  0781                     l1139:	
+   659  0781  0008               	return
+   660                           	opt stack 0
+   661                           GLOBAL	__end_of_lcd_char
+   662  0782                     	__end_of_lcd_char:
+   663 ;; =============== function _lcd_char ends ============
+   664                           
+   665                           	signat	_lcd_char,4216
+   666                           	global	_I2C_read_byte
+   667                           psect	text131,local,class=CODE,delta=2
+   668                           global __ptext131
+   669  0761                     __ptext131:
+   670                           
+   671 ;; *************** function _I2C_read_byte *****************
+   672 ;; Defined at:
+   673 ;;		line 76 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c"
+   674 ;; Parameters:    Size  Location     Type
+   675 ;;		None
+   676 ;; Auto vars:     Size  Location     Type
+   677 ;;		None
+   678 ;; Return value:  Size  Location     Type
+   679 ;;                  1    wreg      unsigned char 
+   680 ;; Registers used:
+   681 ;;		wreg
+   682 ;; Tracked objects:
+   683 ;;		On entry : 0/0
+   684 ;;		On exit  : 0/0
+   685 ;;		Unchanged: 0/0
+   686 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   687 ;;      Params:         0       0       0       0       0
+   688 ;;      Locals:         0       0       0       0       0
+   689 ;;      Temps:          0       0       0       0       0
+   690 ;;      Totals:         0       0       0       0       0
+   691 ;;Total ram usage:        0 bytes
+   692 ;; Hardware stack levels used:    1
+   693 ;; This function calls:
+   694 ;;		Nothing
+   695 ;; This function is called by:
+   696 ;;		_main
+   697 ;; This function uses a non-reentrant model
+   698 ;;
+   699                           psect	text131
+   700                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_
+                                 driver.c"
+   701                           	line	76
+   702                           	global	__size_of_I2C_read_byte
+   703  000D                     	__size_of_I2C_read_byte	equ	__end_of_I2C_read_byte-_I2C_read_byte
+   704                           	
+   705  0761                     _I2C_read_byte:	
+   706                           	opt	stack 7
+   707                           ; Regs used in _I2C_read_byte: [wreg]
+   708                           	line	78
+   709                           	
+   710  0761                     l2140:	
+   711                           ;I2C_driver.c: 78: RCEN=1;
+   712  0761  1683               	bsf	status, 5	;RP0=1, select bank1
+   713  0762  1303               	bcf	status, 6	;RP1=0, select bank1
+   714  0763  1591               	bsf	(1163/8)^080h,(1163)&7
+   715                           	line	79
+   716                           ;I2C_driver.c: 79: while(!SSPIF);
+   717  0764  2F65               	goto	l1754
+   718                           	
+   719  0765                     l1755:	
+   720                           	
+   721  0765                     l1754:	
+   722  0765  1283               	bcf	status, 5	;RP0=0, select bank0
+   723  0766  1303               	bcf	status, 6	;RP1=0, select bank0
+   724  0767  1D8C               	btfss	(99/8),(99)&7
+   725  0768  2F6A               	goto	u31
+   726  0769  2F6B               	goto	u30
+   727  076A                     u31:
+   728  076A  2F65               	goto	l1755
+   729  076B                     u30:
+   730                           	
+   731  076B                     l1756:	
+   732                           	line	80
+   733                           ;I2C_driver.c: 80: SSPIF=0;
+   734  076B  118C               	bcf	(99/8),(99)&7
+   735                           	line	81
+   736                           	
+   737  076C                     l2142:	
+   738                           ;I2C_driver.c: 81: return SSPBUF;
+   739  076C  0813               	movf	(19),w	;volatile
+   740                           	
+   741  076D                     l2144:	
+   742                           	line	83
+   743                           	
+   744  076D                     l1757:	
+   745  076D  0008               	return
+   746                           	opt stack 0
+   747                           GLOBAL	__end_of_I2C_read_byte
+   748  076E                     	__end_of_I2C_read_byte:
+   749 ;; =============== function _I2C_read_byte ends ============
+   750                           
+   751                           	signat	_I2C_read_byte,89
+   752                           	global	_I2C_slave_init
+   753                           psect	text132,local,class=CODE,delta=2
+   754                           global __ptext132
+   755  0754                     __ptext132:
+   756                           
+   757 ;; *************** function _I2C_slave_init *****************
+   758 ;; Defined at:
+   759 ;;		line 23 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c"
+   760 ;; Parameters:    Size  Location     Type
+   761 ;;		None
+   762 ;; Auto vars:     Size  Location     Type
+   763 ;;		None
+   764 ;; Return value:  Size  Location     Type
+   765 ;;		None               void
+   766 ;; Registers used:
+   767 ;;		wreg
+   768 ;; Tracked objects:
+   769 ;;		On entry : 0/0
+   770 ;;		On exit  : 0/0
+   771 ;;		Unchanged: 0/0
+   772 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   773 ;;      Params:         0       0       0       0       0
+   774 ;;      Locals:         0       0       0       0       0
+   775 ;;      Temps:          0       0       0       0       0
+   776 ;;      Totals:         0       0       0       0       0
+   777 ;;Total ram usage:        0 bytes
+   778 ;; Hardware stack levels used:    1
+   779 ;; This function calls:
+   780 ;;		Nothing
+   781 ;; This function is called by:
+   782 ;;		_main
+   783 ;; This function uses a non-reentrant model
+   784 ;;
+   785                           psect	text132
+   786                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_
+                                 driver.c"
+   787                           	line	23
+   788                           	global	__size_of_I2C_slave_init
+   789  000D                     	__size_of_I2C_slave_init	equ	__end_of_I2C_slave_init-_I2C_slave_init
+   790                           	
+   791  0754                     _I2C_slave_init:	
+   792                           	opt	stack 7
+   793                           ; Regs used in _I2C_slave_init: [wreg]
+   794                           	line	24
+   795                           	
+   796  0754                     l2138:	
+   797                           ;I2C_driver.c: 24: TRISC=0X18;
+   798  0754  3018               	movlw	(018h)
+   799  0755  1683               	bsf	status, 5	;RP0=1, select bank1
+   800  0756  1303               	bcf	status, 6	;RP1=0, select bank1
+   801  0757  0087               	movwf	(135)^080h	;volatile
+   802                           	line	25
+   803                           ;I2C_driver.c: 25: SSPADD=0X26;
+   804  0758  3026               	movlw	(026h)
+   805  0759  0093               	movwf	(147)^080h	;volatile
+   806                           	line	26
+   807                           ;I2C_driver.c: 26: SSPSTAT=0X80;
+   808  075A  3080               	movlw	(080h)
+   809  075B  0094               	movwf	(148)^080h	;volatile
+   810                           	line	27
+   811                           ;I2C_driver.c: 27: SSPCON=0X36;
+   812  075C  3036               	movlw	(036h)
+   813  075D  1283               	bcf	status, 5	;RP0=0, select bank0
+   814  075E  1303               	bcf	status, 6	;RP1=0, select bank0
+   815  075F  0094               	movwf	(20)	;volatile
+   816                           	line	28
+   817                           	
+   818  0760                     l1715:	
+   819  0760  0008               	return
+   820                           	opt stack 0
+   821                           GLOBAL	__end_of_I2C_slave_init
+   822  0761                     	__end_of_I2C_slave_init:
+   823 ;; =============== function _I2C_slave_init ends ============
+   824                           
+   825                           	signat	_I2C_slave_init,88
+   826                           	global	_delay
+   827                           psect	text133,local,class=CODE,delta=2
+   828                           global __ptext133
+   829  0796                     __ptext133:
+   830                           
+   831 ;; *************** function _delay *****************
+   832 ;; Defined at:
+   833 ;;		line 7 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_slave.c"
+   834 ;; Parameters:    Size  Location     Type
+   835 ;;		None
+   836 ;; Auto vars:     Size  Location     Type
+   837 ;;  i               2    0[COMMON] unsigned int 
+   838 ;; Return value:  Size  Location     Type
+   839 ;;		None               void
+   840 ;; Registers used:
+   841 ;;		wreg
+   842 ;; Tracked objects:
+   843 ;;		On entry : 0/0
+   844 ;;		On exit  : 0/0
+   845 ;;		Unchanged: 0/0
+   846 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   847 ;;      Params:         0       0       0       0       0
+   848 ;;      Locals:         2       0       0       0       0
+   849 ;;      Temps:          0       0       0       0       0
+   850 ;;      Totals:         2       0       0       0       0
+   851 ;;Total ram usage:        2 bytes
+   852 ;; Hardware stack levels used:    1
+   853 ;; This function calls:
+   854 ;;		Nothing
+   855 ;; This function is called by:
+   856 ;;		_main
+   857 ;; This function uses a non-reentrant model
+   858 ;;
+   859                           psect	text133
+   860                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_slave.c"
+   861                           	line	7
+   862                           	global	__size_of_delay
+   863  001E                     	__size_of_delay	equ	__end_of_delay-_delay
+   864                           	
+   865  0796                     _delay:	
+   866                           	opt	stack 7
+   867                           ; Regs used in _delay: [wreg]
+   868                           	line	9
+   869                           	
+   870  0796                     l2132:	
+   871                           ;i2c_slave.c: 8: unsigned int i;
+   872                           ;i2c_slave.c: 9: for(i=0;i<1000;i++);
+   873  0796  3000               	movlw	low(0)
+   874  0797  00F0               	movwf	(delay@i)
+   875  0798  3000               	movlw	high(0)
+   876  0799  00F1               	movwf	((delay@i))+1
+   877  079A  3003               	movlw	high(03E8h)
+   878  079B  0271               	subwf	(delay@i+1),w
+   879  079C  30E8               	movlw	low(03E8h)
+   880  079D  1903               	skipnz
+   881  079E  0270               	subwf	(delay@i),w
+   882  079F  1C03               	skipc
+   883  07A0  2FA2               	goto	u11
+   884  07A1  2FA3               	goto	u10
+   885  07A2                     u11:
+   886  07A2  2FA4               	goto	l567
+   887  07A3                     u10:
+   888                           	
+   889  07A3                     l2134:	
+   890  07A3  2FB3               	goto	l568
+   891                           	
+   892  07A4                     l567:	
+   893                           	
+   894  07A4                     l2136:	
+   895  07A4  3001               	movlw	low(01h)
+   896  07A5  07F0               	addwf	(delay@i),f
+   897  07A6  1803               	skipnc
+   898  07A7  0AF1               	incf	(delay@i+1),f
+   899  07A8  3000               	movlw	high(01h)
+   900  07A9  07F1               	addwf	(delay@i+1),f
+   901  07AA  3003               	movlw	high(03E8h)
+   902  07AB  0271               	subwf	(delay@i+1),w
+   903  07AC  30E8               	movlw	low(03E8h)
+   904  07AD  1903               	skipnz
+   905  07AE  0270               	subwf	(delay@i),w
+   906  07AF  1C03               	skipc
+   907  07B0  2FB2               	goto	u21
+   908  07B1  2FB3               	goto	u20
+   909  07B2                     u21:
+   910  07B2  2FA4               	goto	l567
+   911  07B3                     u20:
+   912                           	
+   913  07B3                     l568:	
+   914                           	line	10
+   915                           	
+   916  07B3                     l569:	
+   917  07B3  0008               	return
+   918                           	opt stack 0
+   919                           GLOBAL	__end_of_delay
+   920  07B4                     	__end_of_delay:
+   921 ;; =============== function _delay ends ============
+   922                           
+   923                           	signat	_delay,88
+   924                           psect	text134,local,class=CODE,delta=2
+   925                           global __ptext134
+   926  0000                     __ptext134:
+   927                           	global	btemp
+   928  007E                     	btemp set 07Eh
+   929                           
+   930                           	DABS	1,126,2	;btemp
+   931                           	global	wtemp0
+   932  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.71a build 6446 
+Symbol Table                                                                                   Fri Oct 23 18:42:43 2020
+
+           lcd_char@data 0072                       u10 07A3                       u11 07A2  
+                     u20 07B3                       u21 07B2                       u30 076B  
+                     u31 076A                      l572 07E9                      l573 07FC  
+                    l574 07FD                      l567 07A4                      l575 07FD  
+                    l568 07B3                      l569 07B3                      _RE0 0048  
+                    _RE2 004A                      _PEN 048A                      _SEN 0488  
+                   l1136 0795                     l3000 07D5                     l3010 07F1  
+                   l3002 07DA                     l1139 0781                     l2132 0796  
+                   l2140 0761                     l1148 07D4                     l3012 07F6  
+                   l3004 07DF                     l2134 07A3                     l2142 076C  
+                   l3006 07E4                     l2136 07A4                     l2144 076D  
+                   l3008 07E9                     l2138 0754                     l1715 0760  
+                   l1754 0765                     l1755 0765                     l1756 076B  
+                   l1757 076D                     l2970 0772                     l2972 0774  
+                   l2980 0788                     l2974 077E                     l2982 0792  
+                   l2990 07BC                     l2968 076F                     l2976 0783  
+                   l2992 07BF                     l2984 07B4                     l2978 0786  
+                   l2994 07C2                     l2986 07B8                     l2996 07C8  
+                   l2988 07B9                     l2998 07CE                     u2277 078D  
+                   u2287 0779                     _RCEN 048B                     _RSEN 0489  
+                   _main 07D5                     btemp 007E                     start 0000  
+                  ?_main 0070                    _ACKEN 048C                    _ACKDT 048D  
+                  _PORTB 0006                    _PORTE 0009                    _TRISB 0086  
+                  _TRISC 0087                    _TRISE 0089                    _SSPIF 0063  
+        __end_of_lcd_cmd 0796                    _delay 0796                    status 0003  
+                  wtemp0 007E         ??_I2C_slave_init 0070             __end_of_main 0800  
+                 ??_main 0073                   ?_delay 0070                   _ADCON1 009F  
+                 _SSPADD 0093                   _SSPCON 0014                   _SSPBUF 0013  
+       __end_of_lcd_char 0782         __end_of_lcd_init 07D5                   delay@i 0070  
+              ??_lcd_cmd 0070   __size_of_I2C_read_byte 000D           __pcstackCOMMON 0070  
+          __end_of_delay 07B4                  ??_delay 0070               __pmaintext 07D5  
+          _I2C_read_byte 0761                  _ACKSTAT 048E                ?_lcd_char 0070  
+              ?_lcd_init 0070                  _SSPSTAT 0094           ?_I2C_read_byte 0070  
+                _lcd_cmd 0782               ??_lcd_char 0070               ??_lcd_init 0073  
+   end_of_initialization 0750               lcd_cmd@cmd 0072          ??_I2C_read_byte 0070  
+__size_of_I2C_slave_init 000D      start_initialization 0750        __size_of_lcd_char 0014  
+      __size_of_lcd_init 0021                __ptext130 076E                __ptext131 0761  
+              __ptext132 0754                __ptext133 0796                __ptext134 0000  
+              __ptext127 0000                __ptext128 07B4                __ptext129 0782  
+               ?_lcd_cmd 0070           __size_of_delay 001E           _I2C_slave_init 0754  
+ __end_of_I2C_slave_init 0761         __size_of_lcd_cmd 0014                 _lcd_char 076E  
+               _lcd_init 07B4            __size_of_main 002B          ?_I2C_slave_init 0070  
+  __end_of_I2C_read_byte 076E                 main@temp 0074  

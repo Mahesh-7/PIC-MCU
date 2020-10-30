@@ -1,0 +1,210 @@
+_RE0 48 0 ABS
+_RE2 4A 0 ABS
+__S0 800 0 ABS
+__S1 74 0 ABS
+__S2 0 0 ABS
+_PEN 48A 0 ABS
+_SEN 488 0 ABS
+__end_of_I2C_stop 72E 0 CODE
+__Hintentry 0 0 CODE
+__Lintentry 0 0 CODE
+__end_of_I2C_write_string 7A7 0 CODE
+_RCEN 48B 0 ABS
+??_I2C_master_init 70 0 COMMON
+_RSEN 489 0 ABS
+_main 7A7 0 CODE
+btemp 7E 0 ABS
+_exit 0 0 CODE
+start 0 0 CODE
+_TRISB 86 0 ABS
+_SSPIF 63 0 ABS
+_TRISC 87 0 ABS
+reset_vec 0 0 CODE
+_PORTB 6 0 ABS
+_ACKEN 48C 0 ABS
+_TRISE 89 0 ABS
+_PORTE 9 0 ABS
+_ACKDT 48D 0 ABS
+wtemp0 7E 0 ABS
+__end_of_delay 783 0 CODE
+__Hconfig 0 0 CONFIG
+__Lconfig 0 0 CONFIG
+__Hram 0 0 ABS
+__Lram 0 0 ABS
+?_main 70 0 COMMON
+_delay 765 0 CODE
+__Hfunctab 0 0 CODE
+__Lfunctab 0 0 CODE
+_ADCON1 9F 0 ABS
+__Hcommon 0 0 ABS
+__Lcommon 0 0 ABS
+__Heeprom_data 0 0 EEDATA
+__Leeprom_data 0 0 EEDATA
+__end_of_I2C_write_byte 73A 0 CODE
+_SSPADD 93 0 ABS
+_I2C_stop 722 0 CODE
+_SSPBUF 13 0 ABS
+__Habs1 0 0 ABS
+__Labs1 0 0 ABS
+_SSPCON 14 0 ABS
+__Hsfr0 0 0 ABS
+__Lsfr0 0 0 ABS
+__Hsfr1 0 0 ABS
+__Lsfr1 0 0 ABS
+__Hsfr2 0 0 ABS
+__Lsfr2 0 0 ABS
+__Hsfr3 0 0 ABS
+__Lsfr3 0 0 ABS
+_delay1 747 0 CODE
+__size_of_delay 0 0 ABS
+__ptext130 722 0 CODE
+__ptext131 716 0 CODE
+__ptext132 73A 0 CODE
+I2C_write_string@data 73 0 COMMON
+delay@i 70 0 COMMON
+__ptext133 747 0 CODE
+__Hcode 0 0 ABS
+?_I2C_write_byte 70 0 COMMON
+__Lcode 0 0 ABS
+I2C_write_byte@byte 70 0 COMMON
+__ptext134 0 0 CODE
+??_main 74 0 COMMON
+__ptext126 0 0 CODE
+__Hinit 0 0 CODE
+__Linit 0 0 CODE
+?_delay 70 0 COMMON
+__end_of_main 800 0 CODE
+__ptext127 783 0 CODE
+__Htext 0 0 ABS
+__Ltext 0 0 ABS
+__ptext128 765 0 CODE
+end_of_initialization 712 0 CODE
+__ptext129 72E 0 CODE
+__size_of_I2C_stop 0 0 ABS
+__size_of_I2C_start 0 0 ABS
+?_I2C_stop 70 0 COMMON
+__Hstrings 0 0 ABS
+__Lstrings 0 0 ABS
+__pstrings 3 0 STRING
+__size_of_I2C_master_init 0 0 ABS
+__end_of_I2C_start 722 0 CODE
+_I2C_start 716 0 CODE
+__Hbank0 0 0 ABS
+__Lbank0 0 0 ABS
+??_I2C_write_string 72 0 COMMON
+__Hbank1 0 0 ABS
+__Lbank1 0 0 ABS
+__Hbank2 0 0 ABS
+__Lbank2 0 0 ABS
+__Hbank3 0 0 ABS
+__Lbank3 0 0 ABS
+_ACKSTAT 48E 0 ABS
+__Hpowerup 0 0 CODE
+_SSPSTAT 94 0 ABS
+__Lpowerup 0 0 CODE
+?_delay1 70 0 COMMON
+__Hclrtext 0 0 ABS
+__Lclrtext 0 0 ABS
+delay1@i 70 0 COMMON
+__Hidloc 0 0 IDLOC
+__Lidloc 0 0 IDLOC
+??_I2C_write_byte 70 0 COMMON
+__Hcinit 0 0 ABS
+??_delay 70 0 COMMON
+__Lcinit 0 0 ABS
+__size_of_main 0 0 ABS
+__size_of_I2C_write_string 0 0 ABS
+??_I2C_start 70 0 COMMON
+_I2C_write_byte 72E 0 CODE
+_I2C_write_string 783 0 CODE
+_I2C_master_init 73A 0 CODE
+??_I2C_stop 70 0 COMMON
+__Hend_init 3 0 CODE
+__Lend_init 0 0 CODE
+?_I2C_master_init 70 0 COMMON
+__Hreset_vec 0 0 CODE
+__Lreset_vec 0 0 CODE
+__end_of_I2C_master_init 747 0 CODE
+?_I2C_start 70 0 COMMON
+intlevel0 0 0 CODE
+intlevel1 0 0 CODE
+intlevel2 0 0 CODE
+intlevel3 0 0 CODE
+intlevel4 0 0 CODE
+??_delay1 70 0 COMMON
+intlevel5 0 0 CODE
+__HcstackCOMMON 0 0 ABS
+__LcstackCOMMON 0 0 ABS
+__pcstackCOMMON 70 0 COMMON
+__size_of_I2C_write_byte 0 0 ABS
+start_initialization 712 0 CODE
+__Hmaintext 0 0 ABS
+__Lmaintext 0 0 ABS
+__pmaintext 7A7 0 CODE
+__size_of_delay1 0 0 ABS
+?_I2C_write_string 70 0 COMMON
+__end_of_delay1 765 0 CODE
+%segments
+reset_vec 0 5 CODE 0
+cstackCOMMON 70 73 COMMON 70
+maintext F4E FFF CODE F4E
+text127 F06 F4D CODE F06
+text128 ECA F05 CODE ECA
+text133 E8E EC9 CODE E8E
+strings 6 29 STRING 6
+text132 E74 E8D CODE E74
+text129 E5C E73 CODE E5C
+text130 E44 E5B CODE E44
+text131 E2C E43 CODE E2C
+cinit E24 E2B CODE E24
+%locals
+startup.obj
+startup.as
+65 0 0 CODE
+I^2_C.obj
+I^2_C.as
+136 712 0 CODE
+137 713 0 CODE
+C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_master.c
+12 7A7 0 CODE
+13 7AC 0 CODE
+15 7B1 0 CODE
+16 7BB 0 CODE
+18 7C6 0 CODE
+19 7D1 0 CODE
+20 7DC 0 CODE
+21 7E7 0 CODE
+22 7F2 0 CODE
+24 7FC 0 CODE
+25 7FD 0 CODE
+C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c
+86 783 0 CODE
+87 784 0 CODE
+89 785 0 CODE
+90 795 0 CODE
+87 79A 0 CODE
+92 7A6 0 CODE
+C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\i2c_master.c
+8 765 0 CODE
+9 782 0 CODE
+C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\i2c\src\I2C_driver.c
+68 72E 0 CODE
+69 72F 0 CODE
+70 733 0 CODE
+71 738 0 CODE
+73 739 0 CODE
+46 722 0 CODE
+47 725 0 CODE
+48 72C 0 CODE
+49 72D 0 CODE
+32 716 0 CODE
+33 719 0 CODE
+34 720 0 CODE
+35 721 0 CODE
+16 73A 0 CODE
+17 73E 0 CODE
+18 740 0 CODE
+19 742 0 CODE
+20 746 0 CODE
+11 747 0 CODE
+12 764 0 CODE

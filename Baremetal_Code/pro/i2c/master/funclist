@@ -1,0 +1,9 @@
+_I2C_stop: CODE, 1826 0 12
+_I2C_write_string: CODE, 1923 0 36
+_delay: CODE, 1893 0 30
+_I2C_write_byte: CODE, 1838 0 12
+_main: CODE, 1959 0 89
+_I2C_start: CODE, 1814 0 12
+_I2C_master_init: CODE, 1850 0 13
+_delay1: CODE, 1863 0 30
+Total: 234

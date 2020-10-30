@@ -1,0 +1,8 @@
+_delay: CODE, 1942 0 30
+_lcd_cmd: CODE, 1922 0 20
+_I2C_read_byte: CODE, 1889 0 13
+_main: CODE, 2005 0 43
+_lcd_char: CODE, 1902 0 20
+_I2C_slave_init: CODE, 1876 0 13
+_lcd_init: CODE, 1972 0 33
+Total: 172
