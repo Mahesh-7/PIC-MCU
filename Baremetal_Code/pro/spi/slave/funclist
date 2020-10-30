@@ -1,0 +1,7 @@
+_lcd_cmd: CODE, 1955 0 20
+_main: CODE, 2008 0 40
+_spi_slave_init: CODE, 1908 0 12
+_lcd_char: CODE, 1935 0 20
+_slave_read: CODE, 1898 0 10
+_lcd_init: CODE, 1975 0 33
+Total: 135
