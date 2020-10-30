@@ -1,0 +1,8 @@
+_lcd_cmd: CODE, 1921 0 20
+_main: CODE, 2004 0 44
+_uart_read: CODE, 1862 0 10
+_lcd_char: CODE, 1901 0 20
+_uart_init: CODE, 1886 0 15
+_lcd_init: CODE, 1971 0 33
+_delay1: CODE, 1941 0 30
+Total: 172

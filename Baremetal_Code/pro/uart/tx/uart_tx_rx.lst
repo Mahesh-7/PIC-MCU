@@ -1,0 +1,974 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.71a build 6446 
+                                                                                               Thu Oct 22 17:15:49 2020
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 6446
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 6446"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_uart_init
+    43                           	FNCALL	_main,_delay
+    44                           	FNCALL	_main,_uart_write
+    45                           	FNCALL	_main,_delay1
+    46                           	FNCALL	_main,_uart_string
+    47                           	FNCALL	_uart_string,_uart_write
+    48                           	FNCALL	_uart_string,_delay
+    49                           	FNROOT	_main
+    50                           	global	_temp
+    51                           	global	_index
+    52                           	global	_RCREG
+    53                           psect	text86,local,class=CODE,delta=2
+    54                           global __ptext86
+    55  0000                     __ptext86:
+    56  001A                     _RCREG	set	26
+    57                           	global	_RCSTA
+    58  0018                     _RCSTA	set	24
+    59                           	global	_TXREG
+    60  0019                     _TXREG	set	25
+    61                           	global	_RCIF
+    62  0065                     _RCIF	set	101
+    63                           	global	_SPEN
+    64  00C7                     _SPEN	set	199
+    65                           	global	_SPBRG
+    66  0099                     _SPBRG	set	153
+    67                           	global	_TRISC
+    68  0087                     _TRISC	set	135
+    69                           	global	_TXSTA
+    70  0098                     _TXSTA	set	152
+    71                           	global	_TRMT
+    72  04C1                     _TRMT	set	1217
+    73                           	global	_TXEN
+    74  04C5                     _TXEN	set	1221
+    75                           psect	strings,class=STRING,delta=2
+    76                           global __pstrings
+    77  0003                     __pstrings:
+    78                           ;	global	stringdir,stringtab,__stringbase
+    79  0003                     stringtab:
+    80                           ;	String table - string pointers are 1 byte each
+    81  0003                     stringcode:stringdir:
+      + 0003                     stringdir:	
+    82  0003  3000               movlw high(stringdir)
+    83  0004  008A               movwf pclath
+    84  0005  0804               movf fsr,w
+    85  0006  0A84               incf fsr
+    86  0007  0782               	addwf pc
+    87  0008                     __stringbase:
+    88  0008  3400               	retlw	0
+    89                           psect	strings
+    90                           	
+    91  0009                     STR_1:	
+    92  0009  3468               	retlw	104	;'h'
+    93  000A  3465               	retlw	101	;'e'
+    94  000B  346C               	retlw	108	;'l'
+    95  000C  346C               	retlw	108	;'l'
+    96  000D  346F               	retlw	111	;'o'
+    97  000E  3420               	retlw	32	;' '
+    98  000F  3477               	retlw	119	;'w'
+    99  0010  346F               	retlw	111	;'o'
+   100  0011  3472               	retlw	114	;'r'
+   101  0012  346C               	retlw	108	;'l'
+   102  0013  3464               	retlw	100	;'d'
+   103  0014  3400               	retlw	0
+   104                           psect	strings
+   105                           	file	"uart_tx_rx.as"
+   106                           	line	#
+   107                           psect cinit,class=CODE,delta=2
+   108                           global start_initialization
+   109  0726                     start_initialization:
+   110                           
+   111                           psect	bssCOMMON,class=COMMON,space=1
+   112                           global __pbssCOMMON
+   113  0074                     __pbssCOMMON:
+   114  0074                     _index:
+   115  0074                            ds      1
+   116                           
+   117                           psect	bssBANK0,class=BANK0,space=1
+   118                           global __pbssBANK0
+   119  0020                     __pbssBANK0:
+   120  0020                     _temp:
+   121  0020                            ds      32
+   122                           
+   123                           psect clrtext,class=CODE,delta=2
+   124                           global clear_ram
+   125                           ;	Called with FSR containing the base address, and
+   126                           ;	W with the last address+1
+   127  071E                     clear_ram:
+   128  071E  0064               	clrwdt			;clear the watchdog before getting into this loop
+   129  071F                     clrloop:
+   130  071F  0180               	clrf	indf		;clear RAM location pointed to by FSR
+   131  0720  0A84               	incf	fsr,f		;increment pointer
+   132  0721  0604               	xorwf	fsr,w		;XOR with final address
+   133  0722  1903               	btfsc	status,2	;have we reached the end yet?
+   134  0723  3400               	retlw	0		;all done for this memory range, return
+   135  0724  0604               	xorwf	fsr,w		;XOR again to restore value
+   136  0725  2F1F               	goto	clrloop		;do the next byte
+   137                           
+   138                           ; Clear objects allocated to COMMON
+   139                           psect cinit,class=CODE,delta=2
+   140  0726  01F4               	clrf	((__pbssCOMMON)+0)&07Fh
+   141                           ; Clear objects allocated to BANK0
+   142                           psect cinit,class=CODE,delta=2
+   143  0727  1383               	bcf	status, 7	;select IRP bank0
+   144  0728  3020               	movlw	low(__pbssBANK0)
+   145  0729  0084               	movwf	fsr
+   146  072A  3040               	movlw	low((__pbssBANK0)+020h)
+   147  072B  120A  118A  271E   	fcall	clear_ram
+              120A  118A         
+   148                           psect cinit,class=CODE,delta=2
+   149                           global end_of_initialization
+   150                           
+   151                           ;End of C runtime variable initialization code
+   152                           
+   153  0730                     end_of_initialization:
+   154  0730  0183               clrf status
+   155  0731  120A  118A  2FBB   ljmp _main	;jump to C main() function
+   156                           psect	cstackCOMMON,class=COMMON,space=1
+   157                           global __pcstackCOMMON
+   158  0070                     __pcstackCOMMON:
+   159                           	global	?_uart_init
+   160  0070                     ?_uart_init:	; 0 bytes @ 0x0
+   161                           	global	??_uart_init
+   162  0070                     ??_uart_init:	; 0 bytes @ 0x0
+   163                           	global	?_delay
+   164  0070                     ?_delay:	; 0 bytes @ 0x0
+   165                           	global	??_delay
+   166  0070                     ??_delay:	; 0 bytes @ 0x0
+   167                           	global	?_uart_write
+   168  0070                     ?_uart_write:	; 0 bytes @ 0x0
+   169                           	global	??_uart_write
+   170  0070                     ??_uart_write:	; 0 bytes @ 0x0
+   171                           	global	?_uart_string
+   172  0070                     ?_uart_string:	; 0 bytes @ 0x0
+   173                           	global	?_delay1
+   174  0070                     ?_delay1:	; 0 bytes @ 0x0
+   175                           	global	??_delay1
+   176  0070                     ??_delay1:	; 0 bytes @ 0x0
+   177                           	global	?_main
+   178  0070                     ?_main:	; 0 bytes @ 0x0
+   179                           	global	uart_write@data
+   180  0070                     uart_write@data:	; 1 bytes @ 0x0
+   181                           	global	delay1@i
+   182  0070                     delay1@i:	; 2 bytes @ 0x0
+   183                           	global	delay@j
+   184  0070                     delay@j:	; 2 bytes @ 0x0
+   185  0070                     	ds	2
+   186                           	global	??_uart_string
+   187  0072                     ??_uart_string:	; 0 bytes @ 0x2
+   188  0072                     	ds	1
+   189                           	global	uart_string@data
+   190  0073                     uart_string@data:	; 1 bytes @ 0x3
+   191  0073                     	ds	1
+   192                           	global	??_main
+   193  0074                     ??_main:	; 0 bytes @ 0x4
+   194 ;;Data sizes: Strings 12, constant 0, data 0, bss 33, persistent 0 stack 0
+   195 ;;Auto spaces:   Size  Autos    Used
+   196 ;; COMMON          14      4       5
+   197 ;; BANK0           80      0      32
+   198 ;; BANK1           80      0       0
+   199 ;; BANK3           96      0       0
+   200 ;; BANK2           96      0       0
+   201                           
+   202 ;;
+   203 ;; Pointer list with targets:
+   204                           
+   205 ;; uart_string@data	PTR unsigned char  size(1) Largest target is 12
+   206 ;;		 -> STR_1(CODE[12]), 
+   207 ;;
+   208                           
+   209                           
+   210 ;;
+   211 ;; Critical Paths under _main in COMMON
+   212 ;;
+   213 ;;   _main->_uart_string
+   214 ;;   _uart_string->_delay
+   215 ;;
+   216 ;; Critical Paths under _main in BANK0
+   217 ;;
+   218 ;;   None.
+   219 ;;
+   220 ;; Critical Paths under _main in BANK1
+   221 ;;
+   222 ;;   None.
+   223 ;;
+   224 ;; Critical Paths under _main in BANK3
+   225 ;;
+   226 ;;   None.
+   227 ;;
+   228 ;; Critical Paths under _main in BANK2
+   229 ;;
+   230 ;;   None.
+   231                           
+   232 ;;
+   233 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   234 ;;
+   235                           
+   236 ;;
+   237 ;;Call Graph Tables:
+   238 ;;
+   239 ;; ---------------------------------------------------------------------------------
+   240 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   241 ;; ---------------------------------------------------------------------------------
+   242 ;; (0) _main                                                 0     0      0     150
+   243 ;;                          _uart_init
+   244 ;;                              _delay
+   245 ;;                         _uart_write
+   246 ;;                             _delay1
+   247 ;;                        _uart_string
+   248 ;; ---------------------------------------------------------------------------------
+   249 ;; (1) _uart_string                                          2     2      0      75
+   250 ;;                                              2 COMMON     2     2      0
+   251 ;;                         _uart_write
+   252 ;;                              _delay
+   253 ;; ---------------------------------------------------------------------------------
+   254 ;; (2) _uart_write                                           1     1      0      15
+   255 ;;                                              0 COMMON     1     1      0
+   256 ;; ---------------------------------------------------------------------------------
+   257 ;; (2) _delay                                                4     4      0      30
+   258 ;;                                              0 COMMON     2     2      0
+   259 ;; ---------------------------------------------------------------------------------
+   260 ;; (1) _uart_init                                            0     0      0       0
+   261 ;; ---------------------------------------------------------------------------------
+   262 ;; (1) _delay1                                               2     2      0      30
+   263 ;;                                              0 COMMON     2     2      0
+   264 ;; ---------------------------------------------------------------------------------
+   265 ;; Estimated maximum stack depth 2
+   266 ;; ---------------------------------------------------------------------------------
+   267                           
+   268 ;; Call Graph Graphs:
+   269                           
+   270 ;; _main (ROOT)
+   271 ;;   _uart_init
+   272 ;;   _delay
+   273 ;;   _uart_write
+   274 ;;   _delay1
+   275 ;;   _uart_string
+   276 ;;     _uart_write
+   277 ;;     _delay
+   278 ;;
+   279                           
+   280 ;; Address spaces:
+   281                           
+   282 ;;Name               Size   Autos  Total    Cost      Usage
+   283 ;;BITCOMMON            E      0       0       0        0.0%
+   284 ;;EEDATA             100      0       0       0        0.0%
+   285 ;;NULL                 0      0       0       0        0.0%
+   286 ;;CODE                 0      0       0       0        0.0%
+   287 ;;COMMON               E      4       5       1       35.7%
+   288 ;;BITSFR0              0      0       0       1        0.0%
+   289 ;;SFR0                 0      0       0       1        0.0%
+   290 ;;BITSFR1              0      0       0       2        0.0%
+   291 ;;SFR1                 0      0       0       2        0.0%
+   292 ;;STACK                0      0       2       2        0.0%
+   293 ;;ABS                  0      0      25       3        0.0%
+   294 ;;BITBANK0            50      0       0       4        0.0%
+   295 ;;BITSFR3              0      0       0       4        0.0%
+   296 ;;SFR3                 0      0       0       4        0.0%
+   297 ;;BANK0               50      0      20       5       40.0%
+   298 ;;BITSFR2              0      0       0       5        0.0%
+   299 ;;SFR2                 0      0       0       5        0.0%
+   300 ;;BITBANK1            50      0       0       6        0.0%
+   301 ;;BANK1               50      0       0       7        0.0%
+   302 ;;BITBANK3            60      0       0       8        0.0%
+   303 ;;BANK3               60      0       0       9        0.0%
+   304 ;;BITBANK2            60      0       0      10        0.0%
+   305 ;;BANK2               60      0       0      11        0.0%
+   306 ;;DATA                 0      0      27      12        0.0%
+   307                           
+   308                           	global	_main
+   309                           psect	maintext,global,class=CODE,delta=2
+   310                           global __pmaintext
+   311  07BB                     __pmaintext:
+   312                           
+   313 ;; *************** function _main *****************
+   314 ;; Defined at:
+   315 ;;		line 11 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\uart_tx.c"
+   316 ;; Parameters:    Size  Location     Type
+   317 ;;		None
+   318 ;; Auto vars:     Size  Location     Type
+   319 ;;		None
+   320 ;; Return value:  Size  Location     Type
+   321 ;;		None               void
+   322 ;; Registers used:
+   323 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   324 ;; Tracked objects:
+   325 ;;		On entry : 17F/0
+   326 ;;		On exit  : 0/0
+   327 ;;		Unchanged: 0/0
+   328 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   329 ;;      Params:         0       0       0       0       0
+   330 ;;      Locals:         0       0       0       0       0
+   331 ;;      Temps:          0       0       0       0       0
+   332 ;;      Totals:         0       0       0       0       0
+   333 ;;Total ram usage:        0 bytes
+   334 ;; Hardware stack levels required when called:    2
+   335 ;; This function calls:
+   336 ;;		_uart_init
+   337 ;;		_delay
+   338 ;;		_uart_write
+   339 ;;		_delay1
+   340 ;;		_uart_string
+   341 ;; This function is called by:
+   342 ;;		Startup code after reset
+   343 ;; This function uses a non-reentrant model
+   344 ;;
+   345                           psect	maintext
+   346                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\uart_tx.c"
+   347                           	line	11
+   348                           	global	__size_of_main
+   349  0045                     	__size_of_main	equ	__end_of_main-_main
+   350                           	
+   351  07BB                     _main:	
+   352                           	opt	stack 8
+   353                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   354                           	line	13
+   355                           	
+   356  07BB                     l2362:	
+   357                           ;uart_tx.c: 13: uart_init();
+   358  07BB  120A  118A  2734   	fcall	_uart_init
+              120A  118A         
+   359                           	line	16
+   360                           ;uart_tx.c: 16: delay();
+   361  07C0  120A  118A  2779   	fcall	_delay
+              120A  118A         
+   362                           	line	19
+   363                           ;uart_tx.c: 19: uart_write('a');
+   364  07C5  3061               	movlw	(061h)
+   365  07C6  120A  118A  2743   	fcall	_uart_write
+              120A  118A         
+   366                           	line	20
+   367                           ;uart_tx.c: 20: delay1();
+   368  07CB  120A  118A  275B   	fcall	_delay1
+              120A  118A         
+   369                           	line	21
+   370                           ;uart_tx.c: 21: uart_write('b');
+   371  07D0  3062               	movlw	(062h)
+   372  07D1  120A  118A  2743   	fcall	_uart_write
+              120A  118A         
+   373                           	line	22
+   374                           ;uart_tx.c: 22: delay1();
+   375  07D6  120A  118A  275B   	fcall	_delay1
+              120A  118A         
+   376                           	line	23
+   377                           ;uart_tx.c: 23: uart_write('c');
+   378  07DB  3063               	movlw	(063h)
+   379  07DC  120A  118A  2743   	fcall	_uart_write
+              120A  118A         
+   380                           	line	24
+   381                           ;uart_tx.c: 24: delay1();
+   382  07E1  120A  118A  275B   	fcall	_delay1
+              120A  118A         
+   383                           	line	25
+   384                           ;uart_tx.c: 25: uart_write('d');
+   385  07E6  3064               	movlw	(064h)
+   386  07E7  120A  118A  2743   	fcall	_uart_write
+              120A  118A         
+   387                           	line	26
+   388                           ;uart_tx.c: 26: delay1();
+   389  07EC  120A  118A  275B   	fcall	_delay1
+              120A  118A         
+   390                           	line	27
+   391                           	
+   392  07F1                     l2364:	
+   393                           ;uart_tx.c: 27: uart_string("hello world");
+   394  07F1  3001               	movlw	((STR_1-__stringbase))&0ffh
+   395  07F2  120A  118A  2797   	fcall	_uart_string
+              120A  118A         
+   396                           	line	28
+   397                           	
+   398  07F7                     l2366:	
+   399                           ;uart_tx.c: 28: delay1();
+   400  07F7  120A  118A  275B   	fcall	_delay1
+              120A  118A         
+   401                           	line	30
+   402                           ;uart_tx.c: 30: while(1)
+   403                           	
+   404  07FC                     l576:	
+   405                           	line	33
+   406                           ;uart_tx.c: 31: {
+   407                           	
+   408  07FC                     l577:	
+   409                           	line	30
+   410  07FC  2FFC               	goto	l576
+   411                           	
+   412  07FD                     l578:	
+   413                           	line	37
+   414                           	
+   415  07FD                     l579:	
+   416                           	global	start
+   417  07FD  120A  118A  2800   	ljmp	start
+   418                           	opt stack 0
+   419                           GLOBAL	__end_of_main
+   420  0800                     	__end_of_main:
+   421 ;; =============== function _main ends ============
+   422                           
+   423                           	signat	_main,88
+   424                           	global	_uart_string
+   425                           psect	text87,local,class=CODE,delta=2
+   426                           global __ptext87
+   427  0797                     __ptext87:
+   428                           
+   429 ;; *************** function _uart_string *****************
+   430 ;; Defined at:
+   431 ;;		line 34 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\uart\src\uart_driver.c"
+   432 ;; Parameters:    Size  Location     Type
+   433 ;;  data            1    wreg     PTR unsigned char 
+   434 ;;		 -> STR_1(12), 
+   435 ;; Auto vars:     Size  Location     Type
+   436 ;;  data            1    3[COMMON] PTR unsigned char 
+   437 ;;		 -> STR_1(12), 
+   438 ;; Return value:  Size  Location     Type
+   439 ;;		None               void
+   440 ;; Registers used:
+   441 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   442 ;; Tracked objects:
+   443 ;;		On entry : 0/0
+   444 ;;		On exit  : 0/0
+   445 ;;		Unchanged: 0/0
+   446 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   447 ;;      Params:         0       0       0       0       0
+   448 ;;      Locals:         1       0       0       0       0
+   449 ;;      Temps:          1       0       0       0       0
+   450 ;;      Totals:         2       0       0       0       0
+   451 ;;Total ram usage:        2 bytes
+   452 ;; Hardware stack levels used:    1
+   453 ;; Hardware stack levels required when called:    1
+   454 ;; This function calls:
+   455 ;;		_uart_write
+   456 ;;		_delay
+   457 ;; This function is called by:
+   458 ;;		_main
+   459 ;; This function uses a non-reentrant model
+   460 ;;
+   461                           psect	text87
+   462                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\uart\src\uar
+                                 t_driver.c"
+   463                           	line	34
+   464                           	global	__size_of_uart_string
+   465  0024                     	__size_of_uart_string	equ	__end_of_uart_string-_uart_string
+   466                           	
+   467  0797                     _uart_string:	
+   468                           	opt	stack 7
+   469                           ; Regs used in _uart_string: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   470                           ;uart_string@data stored from wreg
+   471  0797  00F3               	movwf	(uart_string@data)
+   472                           	line	35
+   473                           	
+   474  0798                     l2352:	
+   475                           ;uart_driver.c: 35: while(*data)
+   476  0798  2FAE               	goto	l1154
+   477                           	
+   478  0799                     l1155:	
+   479                           	line	37
+   480                           	
+   481  0799                     l2354:	
+   482                           ;uart_driver.c: 36: {
+   483                           ;uart_driver.c: 37: uart_write(*data++);
+   484  0799  0873               	movf	(uart_string@data),w
+   485  079A  0084               	movwf	fsr0
+   486  079B  120A  118A  2003   	fcall	stringdir
+              120A  118A         
+   487  07A0  120A  118A  2743   	fcall	_uart_write
+              120A  118A         
+   488                           	
+   489  07A5                     l2356:	
+   490  07A5  3001               	movlw	(01h)
+   491  07A6  00F2               	movwf	(??_uart_string+0)+0
+   492  07A7  0872               	movf	(??_uart_string+0)+0,w
+   493  07A8  07F3               	addwf	(uart_string@data),f
+   494                           	line	38
+   495                           	
+   496  07A9                     l2358:	
+   497                           ;uart_driver.c: 38: delay();
+   498  07A9  120A  118A  2779   	fcall	_delay
+              120A  118A         
+   499                           	line	39
+   500                           	
+   501  07AE                     l1154:	
+   502                           	line	35
+   503                           	
+   504  07AE                     l2360:	
+   505  07AE  0873               	movf	(uart_string@data),w
+   506  07AF  0084               	movwf	fsr0
+   507  07B0  120A  118A  2003   	fcall	stringdir
+              120A  118A         
+   508  07B5  3800               	iorlw	0
+   509  07B6  1D03               	skipz
+   510  07B7  2FB9               	goto	u2221
+   511  07B8  2FBA               	goto	u2220
+   512  07B9                     u2221:
+   513  07B9  2F99               	goto	l1155
+   514  07BA                     u2220:
+   515                           	
+   516  07BA                     l1156:	
+   517                           	line	40
+   518                           	
+   519  07BA                     l1157:	
+   520  07BA  0008               	return
+   521                           	opt stack 0
+   522                           GLOBAL	__end_of_uart_string
+   523  07BB                     	__end_of_uart_string:
+   524 ;; =============== function _uart_string ends ============
+   525                           
+   526                           	signat	_uart_string,4216
+   527                           	global	_uart_write
+   528                           psect	text88,local,class=CODE,delta=2
+   529                           global __ptext88
+   530  0743                     __ptext88:
+   531                           
+   532 ;; *************** function _uart_write *****************
+   533 ;; Defined at:
+   534 ;;		line 23 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\uart\src\uart_driver.c"
+   535 ;; Parameters:    Size  Location     Type
+   536 ;;  data            1    wreg     unsigned char 
+   537 ;; Auto vars:     Size  Location     Type
+   538 ;;  data            1    0[COMMON] unsigned char 
+   539 ;; Return value:  Size  Location     Type
+   540 ;;		None               void
+   541 ;; Registers used:
+   542 ;;		wreg
+   543 ;; Tracked objects:
+   544 ;;		On entry : 0/0
+   545 ;;		On exit  : 0/0
+   546 ;;		Unchanged: 0/0
+   547 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   548 ;;      Params:         0       0       0       0       0
+   549 ;;      Locals:         1       0       0       0       0
+   550 ;;      Temps:          0       0       0       0       0
+   551 ;;      Totals:         1       0       0       0       0
+   552 ;;Total ram usage:        1 bytes
+   553 ;; Hardware stack levels used:    1
+   554 ;; This function calls:
+   555 ;;		Nothing
+   556 ;; This function is called by:
+   557 ;;		_main
+   558 ;;		_uart_string
+   559 ;; This function uses a non-reentrant model
+   560 ;;
+   561                           psect	text88
+   562                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\uart\src\uar
+                                 t_driver.c"
+   563                           	line	23
+   564                           	global	__size_of_uart_write
+   565  0018                     	__size_of_uart_write	equ	__end_of_uart_write-_uart_write
+   566                           	
+   567  0743                     _uart_write:	
+   568                           	opt	stack 6
+   569                           ; Regs used in _uart_write: [wreg]
+   570                           ;uart_write@data stored from wreg
+   571                           	line	25
+   572  0743  00F0               	movwf	(uart_write@data)
+   573                           	
+   574  0744                     l1550:	
+   575                           ;uart_driver.c: 25: if(TRMT ==1 && SPEN==1 &&TXEN==1)
+   576  0744  1683               	bsf	status, 5	;RP0=1, select bank1
+   577  0745  1303               	bcf	status, 6	;RP1=0, select bank1
+   578  0746  1C98               	btfss	(1217/8)^080h,(1217)&7
+   579  0747  2F49               	goto	u51
+   580  0748  2F4A               	goto	u50
+   581  0749                     u51:
+   582  0749  2F5A               	goto	l1150
+   583  074A                     u50:
+   584                           	
+   585  074A                     l1552:	
+   586  074A  1283               	bcf	status, 5	;RP0=0, select bank0
+   587  074B  1303               	bcf	status, 6	;RP1=0, select bank0
+   588  074C  1F98               	btfss	(199/8),(199)&7
+   589  074D  2F4F               	goto	u61
+   590  074E  2F50               	goto	u60
+   591  074F                     u61:
+   592  074F  2F5A               	goto	l1150
+   593  0750                     u60:
+   594                           	
+   595  0750                     l1554:	
+   596  0750  1683               	bsf	status, 5	;RP0=1, select bank1
+   597  0751  1303               	bcf	status, 6	;RP1=0, select bank1
+   598  0752  1E98               	btfss	(1221/8)^080h,(1221)&7
+   599  0753  2F55               	goto	u71
+   600  0754  2F56               	goto	u70
+   601  0755                     u71:
+   602  0755  2F5A               	goto	l1150
+   603  0756                     u70:
+   604                           	line	27
+   605                           	
+   606  0756                     l1556:	
+   607                           ;uart_driver.c: 26: {
+   608                           ;uart_driver.c: 27: TXREG=data;
+   609  0756  0870               	movf	(uart_write@data),w
+   610  0757  1283               	bcf	status, 5	;RP0=0, select bank0
+   611  0758  1303               	bcf	status, 6	;RP1=0, select bank0
+   612  0759  0099               	movwf	(25)	;volatile
+   613                           	line	28
+   614                           	
+   615  075A                     l1150:	
+   616                           	line	31
+   617                           	
+   618  075A                     l1151:	
+   619  075A  0008               	return
+   620                           	opt stack 0
+   621                           GLOBAL	__end_of_uart_write
+   622  075B                     	__end_of_uart_write:
+   623 ;; =============== function _uart_write ends ============
+   624                           
+   625                           	signat	_uart_write,4216
+   626                           	global	_delay
+   627                           psect	text89,local,class=CODE,delta=2
+   628                           global __ptext89
+   629  0779                     __ptext89:
+   630                           
+   631 ;; *************** function _delay *****************
+   632 ;; Defined at:
+   633 ;;		line 6 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\uart\src\uart_driver.c"
+   634 ;; Parameters:    Size  Location     Type
+   635 ;;		None
+   636 ;; Auto vars:     Size  Location     Type
+   637 ;;  j               2    0[COMMON] unsigned int 
+   638 ;;  i               2    0        unsigned int 
+   639 ;; Return value:  Size  Location     Type
+   640 ;;		None               void
+   641 ;; Registers used:
+   642 ;;		wreg
+   643 ;; Tracked objects:
+   644 ;;		On entry : 0/0
+   645 ;;		On exit  : 0/0
+   646 ;;		Unchanged: 0/0
+   647 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   648 ;;      Params:         0       0       0       0       0
+   649 ;;      Locals:         2       0       0       0       0
+   650 ;;      Temps:          0       0       0       0       0
+   651 ;;      Totals:         2       0       0       0       0
+   652 ;;Total ram usage:        2 bytes
+   653 ;; Hardware stack levels used:    1
+   654 ;; This function calls:
+   655 ;;		Nothing
+   656 ;; This function is called by:
+   657 ;;		_main
+   658 ;;		_uart_string
+   659 ;;		_uart_read
+   660 ;; This function uses a non-reentrant model
+   661 ;;
+   662                           psect	text89
+   663                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\uart\src\uar
+                                 t_driver.c"
+   664                           	line	6
+   665                           	global	__size_of_delay
+   666  001E                     	__size_of_delay	equ	__end_of_delay-_delay
+   667                           	
+   668  0779                     _delay:	
+   669                           	opt	stack 6
+   670                           ; Regs used in _delay: [wreg]
+   671                           	line	8
+   672                           	
+   673  0779                     l1544:	
+   674                           ;uart_driver.c: 7: unsigned int i,j;
+   675                           ;uart_driver.c: 8: for (j=0; j<1000; j++);
+   676  0779  3000               	movlw	low(0)
+   677  077A  00F0               	movwf	(delay@j)
+   678  077B  3000               	movlw	high(0)
+   679  077C  00F1               	movwf	((delay@j))+1
+   680  077D  3003               	movlw	high(03E8h)
+   681  077E  0271               	subwf	(delay@j+1),w
+   682  077F  30E8               	movlw	low(03E8h)
+   683  0780  1903               	skipnz
+   684  0781  0270               	subwf	(delay@j),w
+   685  0782  1C03               	skipc
+   686  0783  2F85               	goto	u31
+   687  0784  2F86               	goto	u30
+   688  0785                     u31:
+   689  0785  2F87               	goto	l1142
+   690  0786                     u30:
+   691                           	
+   692  0786                     l1546:	
+   693  0786  2F96               	goto	l1143
+   694                           	
+   695  0787                     l1142:	
+   696                           	
+   697  0787                     l1548:	
+   698  0787  3001               	movlw	low(01h)
+   699  0788  07F0               	addwf	(delay@j),f
+   700  0789  1803               	skipnc
+   701  078A  0AF1               	incf	(delay@j+1),f
+   702  078B  3000               	movlw	high(01h)
+   703  078C  07F1               	addwf	(delay@j+1),f
+   704  078D  3003               	movlw	high(03E8h)
+   705  078E  0271               	subwf	(delay@j+1),w
+   706  078F  30E8               	movlw	low(03E8h)
+   707  0790  1903               	skipnz
+   708  0791  0270               	subwf	(delay@j),w
+   709  0792  1C03               	skipc
+   710  0793  2F95               	goto	u41
+   711  0794  2F96               	goto	u40
+   712  0795                     u41:
+   713  0795  2F87               	goto	l1142
+   714  0796                     u40:
+   715                           	
+   716  0796                     l1143:	
+   717                           	line	9
+   718                           	
+   719  0796                     l1144:	
+   720  0796  0008               	return
+   721                           	opt stack 0
+   722                           GLOBAL	__end_of_delay
+   723  0797                     	__end_of_delay:
+   724 ;; =============== function _delay ends ============
+   725                           
+   726                           	signat	_delay,88
+   727                           	global	_uart_init
+   728                           psect	text90,local,class=CODE,delta=2
+   729                           global __ptext90
+   730  0734                     __ptext90:
+   731                           
+   732 ;; *************** function _uart_init *****************
+   733 ;; Defined at:
+   734 ;;		line 12 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\uart\src\uart_driver.c"
+   735 ;; Parameters:    Size  Location     Type
+   736 ;;		None
+   737 ;; Auto vars:     Size  Location     Type
+   738 ;;		None
+   739 ;; Return value:  Size  Location     Type
+   740 ;;		None               void
+   741 ;; Registers used:
+   742 ;;		wreg
+   743 ;; Tracked objects:
+   744 ;;		On entry : 0/0
+   745 ;;		On exit  : 0/0
+   746 ;;		Unchanged: 0/0
+   747 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   748 ;;      Params:         0       0       0       0       0
+   749 ;;      Locals:         0       0       0       0       0
+   750 ;;      Temps:          0       0       0       0       0
+   751 ;;      Totals:         0       0       0       0       0
+   752 ;;Total ram usage:        0 bytes
+   753 ;; Hardware stack levels used:    1
+   754 ;; This function calls:
+   755 ;;		Nothing
+   756 ;; This function is called by:
+   757 ;;		_main
+   758 ;; This function uses a non-reentrant model
+   759 ;;
+   760                           psect	text90
+   761                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\core\drv\uart\src\uar
+                                 t_driver.c"
+   762                           	line	12
+   763                           	global	__size_of_uart_init
+   764  000F                     	__size_of_uart_init	equ	__end_of_uart_init-_uart_init
+   765                           	
+   766  0734                     _uart_init:	
+   767                           	opt	stack 7
+   768                           ; Regs used in _uart_init: [wreg]
+   769                           	line	13
+   770                           	
+   771  0734                     l1542:	
+   772                           ;uart_driver.c: 13: TRISC=0X80;
+   773  0734  3080               	movlw	(080h)
+   774  0735  1683               	bsf	status, 5	;RP0=1, select bank1
+   775  0736  1303               	bcf	status, 6	;RP1=0, select bank1
+   776  0737  0087               	movwf	(135)^080h	;volatile
+   777                           	line	14
+   778                           ;uart_driver.c: 14: TXSTA=0X26;
+   779  0738  3026               	movlw	(026h)
+   780  0739  0098               	movwf	(152)^080h	;volatile
+   781                           	line	15
+   782                           ;uart_driver.c: 15: RCSTA=0X90;
+   783  073A  3090               	movlw	(090h)
+   784  073B  1283               	bcf	status, 5	;RP0=0, select bank0
+   785  073C  1303               	bcf	status, 6	;RP1=0, select bank0
+   786  073D  0098               	movwf	(24)	;volatile
+   787                           	line	16
+   788                           ;uart_driver.c: 16: SPBRG=25;
+   789  073E  3019               	movlw	(019h)
+   790  073F  1683               	bsf	status, 5	;RP0=1, select bank1
+   791  0740  1303               	bcf	status, 6	;RP1=0, select bank1
+   792  0741  0099               	movwf	(153)^080h	;volatile
+   793                           	line	18
+   794                           	
+   795  0742                     l1147:	
+   796  0742  0008               	return
+   797                           	opt stack 0
+   798                           GLOBAL	__end_of_uart_init
+   799  0743                     	__end_of_uart_init:
+   800 ;; =============== function _uart_init ends ============
+   801                           
+   802                           	signat	_uart_init,88
+   803                           	global	_delay1
+   804                           psect	text91,local,class=CODE,delta=2
+   805                           global __ptext91
+   806  075B                     __ptext91:
+   807                           
+   808 ;; *************** function _delay1 *****************
+   809 ;; Defined at:
+   810 ;;		line 5 in file "C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\uart_tx.c"
+   811 ;; Parameters:    Size  Location     Type
+   812 ;;		None
+   813 ;; Auto vars:     Size  Location     Type
+   814 ;;  i               2    0[COMMON] unsigned int 
+   815 ;; Return value:  Size  Location     Type
+   816 ;;		None               void
+   817 ;; Registers used:
+   818 ;;		wreg
+   819 ;; Tracked objects:
+   820 ;;		On entry : 0/0
+   821 ;;		On exit  : 0/0
+   822 ;;		Unchanged: 0/0
+   823 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   824 ;;      Params:         0       0       0       0       0
+   825 ;;      Locals:         2       0       0       0       0
+   826 ;;      Temps:          0       0       0       0       0
+   827 ;;      Totals:         2       0       0       0       0
+   828 ;;Total ram usage:        2 bytes
+   829 ;; Hardware stack levels used:    1
+   830 ;; This function calls:
+   831 ;;		Nothing
+   832 ;; This function is called by:
+   833 ;;		_main
+   834 ;; This function uses a non-reentrant model
+   835 ;;
+   836                           psect	text91
+   837                           	file	"C:\Users\user.user-PC\Desktop\Devlps\PIC-MCU\Baremetal_Code\app\src\uart_tx.c"
+   838                           	line	5
+   839                           	global	__size_of_delay1
+   840  001E                     	__size_of_delay1	equ	__end_of_delay1-_delay1
+   841                           	
+   842  075B                     _delay1:	
+   843                           	opt	stack 7
+   844                           ; Regs used in _delay1: [wreg]
+   845                           	line	7
+   846                           	
+   847  075B                     l1536:	
+   848                           ;uart_tx.c: 6: unsigned int i;
+   849                           ;uart_tx.c: 7: for( i=0;i<10000;i++);
+   850  075B  3000               	movlw	low(0)
+   851  075C  00F0               	movwf	(delay1@i)
+   852  075D  3000               	movlw	high(0)
+   853  075E  00F1               	movwf	((delay1@i))+1
+   854  075F  3027               	movlw	high(02710h)
+   855  0760  0271               	subwf	(delay1@i+1),w
+   856  0761  3010               	movlw	low(02710h)
+   857  0762  1903               	skipnz
+   858  0763  0270               	subwf	(delay1@i),w
+   859  0764  1C03               	skipc
+   860  0765  2F67               	goto	u11
+   861  0766  2F68               	goto	u10
+   862  0767                     u11:
+   863  0767  2F69               	goto	l571
+   864  0768                     u10:
+   865                           	
+   866  0768                     l1538:	
+   867  0768  2F78               	goto	l572
+   868                           	
+   869  0769                     l571:	
+   870                           	
+   871  0769                     l1540:	
+   872  0769  3001               	movlw	low(01h)
+   873  076A  07F0               	addwf	(delay1@i),f
+   874  076B  1803               	skipnc
+   875  076C  0AF1               	incf	(delay1@i+1),f
+   876  076D  3000               	movlw	high(01h)
+   877  076E  07F1               	addwf	(delay1@i+1),f
+   878  076F  3027               	movlw	high(02710h)
+   879  0770  0271               	subwf	(delay1@i+1),w
+   880  0771  3010               	movlw	low(02710h)
+   881  0772  1903               	skipnz
+   882  0773  0270               	subwf	(delay1@i),w
+   883  0774  1C03               	skipc
+   884  0775  2F77               	goto	u21
+   885  0776  2F78               	goto	u20
+   886  0777                     u21:
+   887  0777  2F69               	goto	l571
+   888  0778                     u20:
+   889                           	
+   890  0778                     l572:	
+   891                           	line	8
+   892                           	
+   893  0778                     l573:	
+   894  0778  0008               	return
+   895                           	opt stack 0
+   896                           GLOBAL	__end_of_delay1
+   897  0779                     	__end_of_delay1:
+   898 ;; =============== function _delay1 ends ============
+   899                           
+   900                           	signat	_delay1,88
+   901                           psect	text92,local,class=CODE,delta=2
+   902                           global __ptext92
+   903  0000                     __ptext92:
+   904                           	global	btemp
+   905  007E                     	btemp set 07Eh
+   906                           
+   907                           	DABS	1,126,2	;btemp
+   908                           	global	wtemp0
+   909  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.71a build 6446 
+Symbol Table                                                                                   Thu Oct 22 17:15:49 2020
+
+     uart_string@data 0073                     pc 0002        uart_write@data 0070                    u10 0768  
+                  u11 0767                    u20 0778                    u21 0777                    u30 0786  
+                  u31 0785                    u40 0796                    u41 0795                    u50 074A  
+                  u51 0749                    u60 0750                    u61 074F                    u70 0756  
+                  u71 0755                    fsr 0004                   l571 0769                   l572 0778  
+                 l573 0778                   l576 07FC                   l577 07FC                   l578 07FD  
+                 l579 07FD                   fsr0 0004                   indf 0000                  l1142 0787  
+                l1150 075A                  l1143 0796                  l1151 075A                  l1144 0796  
+                l1154 07AE                  l1147 0742                  l1155 0799                  l1156 07BA  
+                l1157 07BA                  l1540 0769                  l1542 0734                  l1550 0744  
+                l1536 075B                  l1544 0779                  l1552 074A                  l2360 07AE  
+                l2352 0798                  l1538 0768                  l1546 0786                  l1554 0750  
+                l2354 0799                  l2362 07BB                  l1548 0787                  l1556 0756  
+                l2356 07A5                  l2364 07F1                  l2358 07A9                  l2366 07F7  
+                STR_1 0009                  u2220 07BA                  u2221 07B9                  _RCIF 0065  
+                _SPEN 00C7                  _TRMT 04C1                  _TXEN 04C5                  _main 07BB  
+                _temp 0020                  btemp 007E                  start 0000                 ?_main 0070  
+               _RCREG 001A                 _RCSTA 0018                 _SPBRG 0099                 _TRISC 0087  
+               _TXREG 0019                 _TXSTA 0098                 _delay 0779                 _index 0074  
+               pclath 000A                 status 0003                 wtemp0 007E          __end_of_main 0800  
+              ??_main 0074                ?_delay 0070                _delay1 075B                delay@j 0070  
+              clrloop 071F          ?_uart_string 0070        __pcstackCOMMON 0070         __end_of_delay 0797  
+             ??_delay 0070            __pbssBANK0 0020            __pmaintext 07BB               ?_delay1 0070  
+  __size_of_uart_init 000F       __size_of_delay1 001E               delay1@i 0070  __size_of_uart_string 0024  
+end_of_initialization 0730     __end_of_uart_init 0743            _uart_write 0743        __end_of_delay1 0779  
+ start_initialization 0726              ??_delay1 0070           ?_uart_write 0070           __pbssCOMMON 0074  
+           __pstrings 0003        __size_of_delay 001E   __size_of_uart_write 0018             _uart_init 0734  
+         __stringbase 0008         ??_uart_string 0072            ?_uart_init 0070              __ptext90 0734  
+            __ptext91 075B              __ptext92 0000              __ptext86 0000              __ptext87 0797  
+            __ptext88 0743              __ptext89 0779   __end_of_uart_string 07BB         __size_of_main 0045  
+            clear_ram 071E          ??_uart_write 0070    __end_of_uart_write 075B             stringcode 0003  
+         ??_uart_init 0070              stringdir 0003              stringtab 0003           _uart_string 0797  
