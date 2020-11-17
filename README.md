@@ -1,3 +1,3 @@
 # PIC-MCU
 
-MCU: pic16f877A
+MCU:PIC16f877A
