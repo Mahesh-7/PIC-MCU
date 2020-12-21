@@ -1,0 +1,680 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.71a build 6446 
+                                                                                               Mon Dec 21 18:29:21 2020
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 6446
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 6446"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_Timer0_Init
+    43                           	FNCALL	_main,_Delay_sec_Timer0
+    44                           	FNCALL	_Delay_sec_Timer0,___wmul
+    45                           	FNROOT	_main
+    46                           	global	_PORTB
+    47                           psect	text79,local,class=CODE,delta=2
+    48                           global __ptext79
+    49  0000                     __ptext79:
+    50  0006                     _PORTB	set	6
+    51                           	global	_TMR0
+    52  0001                     _TMR0	set	1
+    53                           	global	_T0IF
+    54  005A                     _T0IF	set	90
+    55                           	global	_OPTION
+    56  0081                     _OPTION	set	129
+    57                           	global	_TRISB
+    58  0086                     _TRISB	set	134
+    59                           	file	"timer0.as"
+    60                           	line	#
+    61                           psect cinit,class=CODE,delta=2
+    62                           global start_initialization
+    63  0782                     start_initialization:
+    64                           
+    65                           psect cinit,class=CODE,delta=2
+    66                           global end_of_initialization
+    67                           
+    68                           ;End of C runtime variable initialization code
+    69                           
+    70  0782                     end_of_initialization:
+    71  0782  0183               clrf status
+    72  0783  120A  118A  2F8F   ljmp _main	;jump to C main() function
+    73                           psect	cstackCOMMON,class=COMMON,space=1
+    74                           global __pcstackCOMMON
+    75  0070                     __pcstackCOMMON:
+    76                           	global	?_Timer0_Init
+    77  0070                     ?_Timer0_Init:	; 0 bytes @ 0x0
+    78                           	global	??_Timer0_Init
+    79  0070                     ??_Timer0_Init:	; 0 bytes @ 0x0
+    80                           	global	?_main
+    81  0070                     ?_main:	; 0 bytes @ 0x0
+    82                           	global	?___wmul
+    83  0070                     ?___wmul:	; 2 bytes @ 0x0
+    84                           	global	___wmul@multiplier
+    85  0070                     ___wmul@multiplier:	; 2 bytes @ 0x0
+    86  0070                     	ds	2
+    87                           	global	___wmul@multiplicand
+    88  0072                     ___wmul@multiplicand:	; 2 bytes @ 0x2
+    89  0072                     	ds	2
+    90                           	global	??___wmul
+    91  0074                     ??___wmul:	; 0 bytes @ 0x4
+    92                           	global	___wmul@product
+    93  0074                     ___wmul@product:	; 2 bytes @ 0x4
+    94  0074                     	ds	2
+    95                           	global	?_Delay_sec_Timer0
+    96  0076                     ?_Delay_sec_Timer0:	; 0 bytes @ 0x6
+    97                           	global	Delay_sec_Timer0@Delay
+    98  0076                     Delay_sec_Timer0@Delay:	; 2 bytes @ 0x6
+    99  0076                     	ds	2
+   100                           	global	??_Delay_sec_Timer0
+   101  0078                     ??_Delay_sec_Timer0:	; 0 bytes @ 0x8
+   102                           	global	??_main
+   103  0078                     ??_main:	; 0 bytes @ 0x8
+   104 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+   105 ;;Auto spaces:   Size  Autos    Used
+   106 ;; COMMON          14      8       8
+   107 ;; BANK0           80      0       0
+   108 ;; BANK1           80      0       0
+   109 ;; BANK3           96      0       0
+   110 ;; BANK2           96      0       0
+   111                           
+   112 ;;
+   113 ;; Pointer list with targets:
+   114                           
+   115 ;; ?___wmul	unsigned int  size(1) Largest target is 0
+   116 ;;
+   117                           
+   118                           
+   119 ;;
+   120 ;; Critical Paths under _main in COMMON
+   121 ;;
+   122 ;;   _main->_Delay_sec_Timer0
+   123 ;;   _Delay_sec_Timer0->___wmul
+   124 ;;
+   125 ;; Critical Paths under _main in BANK0
+   126 ;;
+   127 ;;   None.
+   128 ;;
+   129 ;; Critical Paths under _main in BANK1
+   130 ;;
+   131 ;;   None.
+   132 ;;
+   133 ;; Critical Paths under _main in BANK3
+   134 ;;
+   135 ;;   None.
+   136 ;;
+   137 ;; Critical Paths under _main in BANK2
+   138 ;;
+   139 ;;   None.
+   140                           
+   141 ;;
+   142 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   143 ;;
+   144                           
+   145 ;;
+   146 ;;Call Graph Tables:
+   147 ;;
+   148 ;; ---------------------------------------------------------------------------------
+   149 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   150 ;; ---------------------------------------------------------------------------------
+   151 ;; (0) _main                                                 0     0      0      90
+   152 ;;                        _Timer0_Init
+   153 ;;                   _Delay_sec_Timer0
+   154 ;; ---------------------------------------------------------------------------------
+   155 ;; (1) _Delay_sec_Timer0                                     2     0      2      90
+   156 ;;                                              6 COMMON     2     0      2
+   157 ;;                             ___wmul
+   158 ;; ---------------------------------------------------------------------------------
+   159 ;; (2) ___wmul                                               6     2      4      60
+   160 ;;                                              0 COMMON     6     2      4
+   161 ;; ---------------------------------------------------------------------------------
+   162 ;; (1) _Timer0_Init                                          0     0      0       0
+   163 ;; ---------------------------------------------------------------------------------
+   164 ;; Estimated maximum stack depth 2
+   165 ;; ---------------------------------------------------------------------------------
+   166                           
+   167 ;; Call Graph Graphs:
+   168                           
+   169 ;; _main (ROOT)
+   170 ;;   _Timer0_Init
+   171 ;;   _Delay_sec_Timer0
+   172 ;;     ___wmul
+   173 ;;
+   174                           
+   175 ;; Address spaces:
+   176                           
+   177 ;;Name               Size   Autos  Total    Cost      Usage
+   178 ;;BITCOMMON            E      0       0       0        0.0%
+   179 ;;EEDATA             100      0       0       0        0.0%
+   180 ;;NULL                 0      0       0       0        0.0%
+   181 ;;CODE                 0      0       0       0        0.0%
+   182 ;;COMMON               E      8       8       1       57.1%
+   183 ;;BITSFR0              0      0       0       1        0.0%
+   184 ;;SFR0                 0      0       0       1        0.0%
+   185 ;;BITSFR1              0      0       0       2        0.0%
+   186 ;;SFR1                 0      0       0       2        0.0%
+   187 ;;STACK                0      0       2       2        0.0%
+   188 ;;ABS                  0      0       0       3        0.0%
+   189 ;;BITBANK0            50      0       0       4        0.0%
+   190 ;;BITSFR3              0      0       0       4        0.0%
+   191 ;;SFR3                 0      0       0       4        0.0%
+   192 ;;BANK0               50      0       0       5        0.0%
+   193 ;;BITSFR2              0      0       0       5        0.0%
+   194 ;;SFR2                 0      0       0       5        0.0%
+   195 ;;BITBANK1            50      0       0       6        0.0%
+   196 ;;BANK1               50      0       0       7        0.0%
+   197 ;;BITBANK3            60      0       0       8        0.0%
+   198 ;;BANK3               60      0       0       9        0.0%
+   199 ;;BITBANK2            60      0       0      10        0.0%
+   200 ;;BANK2               60      0       0      11        0.0%
+   201 ;;DATA                 0      0       0      12        0.0%
+   202                           
+   203                           	global	_main
+   204                           psect	maintext,global,class=CODE,delta=2
+   205                           global __pmaintext
+   206  078F                     __pmaintext:
+   207                           
+   208 ;; *************** function _main *****************
+   209 ;; Defined at:
+   210 ;;		line 6 in file "../../app/inc/..\..\platform\..\core\drv\adc\inc\adc_driver.h"
+   211 ;; Parameters:    Size  Location     Type
+   212 ;;		None
+   213 ;; Auto vars:     Size  Location     Type
+   214 ;;		None
+   215 ;; Return value:  Size  Location     Type
+   216 ;;		None               void
+   217 ;; Registers used:
+   218 ;;		wreg, status,2, status,0, pclath, cstack
+   219 ;; Tracked objects:
+   220 ;;		On entry : 17F/0
+   221 ;;		On exit  : 0/0
+   222 ;;		Unchanged: 0/0
+   223 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   224 ;;      Params:         0       0       0       0       0
+   225 ;;      Locals:         0       0       0       0       0
+   226 ;;      Temps:          0       0       0       0       0
+   227 ;;      Totals:         0       0       0       0       0
+   228 ;;Total ram usage:        0 bytes
+   229 ;; Hardware stack levels required when called:    2
+   230 ;; This function calls:
+   231 ;;		_Timer0_Init
+   232 ;;		_Delay_sec_Timer0
+   233 ;; This function is called by:
+   234 ;;		Startup code after reset
+   235 ;; This function uses a non-reentrant model
+   236 ;;
+   237                           psect	maintext
+   238                           	file	"../../app/inc/..\..\platform\..\core\drv\adc\inc\adc_driver.h"
+   239                           	line	6
+   240                           	global	__size_of_main
+   241  001B                     	__size_of_main	equ	__end_of_main-_main
+   242                           	
+   243  078F                     _main:	
+   244                           	opt	stack 8
+   245                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   246                           	line	8
+   247                           	
+   248  078F                     l2332:	
+   249                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 8: TRISB=0X00;
+   250  078F  1683               	bsf	status, 5	;RP0=1, select bank1
+   251  0790  1303               	bcf	status, 6	;RP1=0, select bank1
+   252  0791  0186               	clrf	(134)^080h	;volatile
+   253                           	line	9
+   254                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 9: PORTB=0X00;
+   255  0792  1283               	bcf	status, 5	;RP0=0, select bank0
+   256  0793  1303               	bcf	status, 6	;RP1=0, select bank0
+   257  0794  0186               	clrf	(6)	;volatile
+   258                           	line	10
+   259                           	
+   260  0795                     l2334:	
+   261                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 10: Timer0_Init();
+   262  0795  120A  118A  2786   	fcall	_Timer0_Init
+              120A  118A         
+   263                           	line	12
+   264                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 12: while(1)
+   265                           	
+   266  079A                     l563:	
+   267                           	line	16
+   268                           	
+   269  079A                     l2336:	
+   270                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 13: {
+   271                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 16: PORTB = ~PORTB;
+   272  079A  1283               	bcf	status, 5	;RP0=0, select bank0
+   273  079B  1303               	bcf	status, 6	;RP1=0, select bank0
+   274  079C  0986               	comf	(6),f	;volatile
+   275                           	line	17
+   276                           	
+   277  079D                     l2338:	
+   278                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 17: Delay_sec_Timer0(1);
+   279  079D  3001               	movlw	low(01h)
+   280  079E  00F6               	movwf	(?_Delay_sec_Timer0)
+   281  079F  3000               	movlw	high(01h)
+   282  07A0  00F7               	movwf	((?_Delay_sec_Timer0))+1
+   283  07A1  120A  118A  27D3   	fcall	_Delay_sec_Timer0
+              120A  118A         
+   284                           	line	20
+   285                           	
+   286  07A6                     l564:	
+   287                           	line	12
+   288  07A6  2F9A               	goto	l563
+   289                           	
+   290  07A7                     l565:	
+   291                           	line	21
+   292                           	
+   293  07A7                     l566:	
+   294                           	global	start
+   295  07A7  120A  118A  2800   	ljmp	start
+   296                           	opt stack 0
+   297                           GLOBAL	__end_of_main
+   298  07AA                     	__end_of_main:
+   299 ;; =============== function _main ends ============
+   300                           
+   301                           	signat	_main,88
+   302                           	global	_Delay_sec_Timer0
+   303                           psect	text80,local,class=CODE,delta=2
+   304                           global __ptext80
+   305  07D3                     __ptext80:
+   306                           
+   307 ;; *************** function _Delay_sec_Timer0 *****************
+   308 ;; Defined at:
+   309 ;;		line 29 in file "../../app/inc/..\..\platform\..\core\drv\adc\inc\adc_driver.h"
+   310 ;; Parameters:    Size  Location     Type
+   311 ;;  Delay           2    6[COMMON] unsigned int 
+   312 ;; Auto vars:     Size  Location     Type
+   313 ;;		None
+   314 ;; Return value:  Size  Location     Type
+   315 ;;		None               void
+   316 ;; Registers used:
+   317 ;;		wreg, status,2, status,0, pclath, cstack
+   318 ;; Tracked objects:
+   319 ;;		On entry : 0/0
+   320 ;;		On exit  : 0/0
+   321 ;;		Unchanged: 0/0
+   322 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   323 ;;      Params:         2       0       0       0       0
+   324 ;;      Locals:         0       0       0       0       0
+   325 ;;      Temps:          0       0       0       0       0
+   326 ;;      Totals:         2       0       0       0       0
+   327 ;;Total ram usage:        2 bytes
+   328 ;; Hardware stack levels used:    1
+   329 ;; Hardware stack levels required when called:    1
+   330 ;; This function calls:
+   331 ;;		___wmul
+   332 ;; This function is called by:
+   333 ;;		_main
+   334 ;; This function uses a non-reentrant model
+   335 ;;
+   336                           psect	text80
+   337                           	file	"../../app/inc/..\..\platform\..\core\drv\adc\inc\adc_driver.h"
+   338                           	line	29
+   339                           	global	__size_of_Delay_sec_Timer0
+   340  002D                     	__size_of_Delay_sec_Timer0	equ	__end_of_Delay_sec_Timer0-_Delay_sec_Timer0
+   341                           	
+   342  07D3                     _Delay_sec_Timer0:	
+   343                           	opt	stack 7
+   344                           ; Regs used in _Delay_sec_Timer0: [wreg+status,2+status,0+pclath+cstack]
+   345                           	line	30
+   346                           	
+   347  07D3                     l2324:	
+   348                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 30: Delay *= 1000;
+   349  07D3  30E8               	movlw	low(03E8h)
+   350  07D4  00F0               	movwf	(?___wmul)
+   351  07D5  3003               	movlw	high(03E8h)
+   352  07D6  00F1               	movwf	((?___wmul))+1
+   353  07D7  0877               	movf	(Delay_sec_Timer0@Delay+1),w
+   354  07D8  01F3               	clrf	1+(?___wmul)+02h
+   355  07D9  07F3               	addwf	1+(?___wmul)+02h
+   356  07DA  0876               	movf	(Delay_sec_Timer0@Delay),w
+   357  07DB  01F2               	clrf	0+(?___wmul)+02h
+   358  07DC  07F2               	addwf	0+(?___wmul)+02h
+   359                           
+   360  07DD  120A  118A  27AA   	fcall	___wmul
+              120A  118A         
+   361  07E2  0871               	movf	(1+(?___wmul)),w
+   362  07E3  01F7               	clrf	(Delay_sec_Timer0@Delay+1)
+   363  07E4  07F7               	addwf	(Delay_sec_Timer0@Delay+1)
+   364  07E5  0870               	movf	(0+(?___wmul)),w
+   365  07E6  01F6               	clrf	(Delay_sec_Timer0@Delay)
+   366  07E7  07F6               	addwf	(Delay_sec_Timer0@Delay)
+   367                           
+   368                           	line	31
+   369                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 31: while(Delay>0)
+   370  07E8  2FF9               	goto	l1137
+   371                           	
+   372  07E9                     l1138:	
+   373                           	line	34
+   374                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 32: {
+   375                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 34: while(T0IF==0);
+   376  07E9  2FEA               	goto	l1139
+   377                           	
+   378  07EA                     l1140:	
+   379                           	
+   380  07EA                     l1139:	
+   381  07EA  1D0B               	btfss	(90/8),(90)&7
+   382  07EB  2FED               	goto	u2161
+   383  07EC  2FEE               	goto	u2160
+   384  07ED                     u2161:
+   385  07ED  2FEA               	goto	l1140
+   386  07EE                     u2160:
+   387                           	
+   388  07EE                     l1141:	
+   389                           	line	35
+   390                           	
+   391  07EE                     l2326:	
+   392                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 35: TMR0=0X06;
+   393  07EE  3006               	movlw	(06h)
+   394  07EF  1283               	bcf	status, 5	;RP0=0, select bank0
+   395  07F0  1303               	bcf	status, 6	;RP1=0, select bank0
+   396  07F1  0081               	movwf	(1)	;volatile
+   397                           	line	36
+   398                           	
+   399  07F2                     l2328:	
+   400                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 36: T0IF=0;
+   401  07F2  110B               	bcf	(90/8),(90)&7
+   402                           	line	37
+   403                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 37: Delay--;
+   404  07F3  3001               	movlw	low(01h)
+   405  07F4  02F6               	subwf	(Delay_sec_Timer0@Delay),f
+   406  07F5  3000               	movlw	high(01h)
+   407  07F6  1C03               	skipc
+   408  07F7  03F7               	decf	(Delay_sec_Timer0@Delay+1),f
+   409  07F8  02F7               	subwf	(Delay_sec_Timer0@Delay+1),f
+   410                           	line	38
+   411                           	
+   412  07F9                     l1137:	
+   413                           	line	31
+   414                           	
+   415  07F9                     l2330:	
+   416  07F9  0877               	movf	((Delay_sec_Timer0@Delay+1)),w
+   417  07FA  0476               	iorwf	((Delay_sec_Timer0@Delay)),w
+   418  07FB  1D03               	skipz
+   419  07FC  2FFE               	goto	u2171
+   420  07FD  2FFF               	goto	u2170
+   421  07FE                     u2171:
+   422  07FE  2FE9               	goto	l1138
+   423  07FF                     u2170:
+   424                           	
+   425  07FF                     l1142:	
+   426                           	line	39
+   427                           	
+   428  07FF                     l1143:	
+   429  07FF  0008               	return
+   430                           	opt stack 0
+   431                           GLOBAL	__end_of_Delay_sec_Timer0
+   432  0800                     	__end_of_Delay_sec_Timer0:
+   433 ;; =============== function _Delay_sec_Timer0 ends ============
+   434                           
+   435                           	signat	_Delay_sec_Timer0,4216
+   436                           	global	___wmul
+   437                           psect	text81,local,class=CODE,delta=2
+   438                           global __ptext81
+   439  07AA                     __ptext81:
+   440                           
+   441 ;; *************** function ___wmul *****************
+   442 ;; Defined at:
+   443 ;;		line 3 in file "C:\Program Files\HI-TECH Software\PICC\9.71a\sources\wmul.c"
+   444 ;; Parameters:    Size  Location     Type
+   445 ;;  multiplier      2    0[COMMON] unsigned int 
+   446 ;;  multiplicand    2    2[COMMON] unsigned int 
+   447 ;; Auto vars:     Size  Location     Type
+   448 ;;  product         2    4[COMMON] unsigned int 
+   449 ;; Return value:  Size  Location     Type
+   450 ;;                  2    0[COMMON] unsigned int 
+   451 ;; Registers used:
+   452 ;;		wreg, status,2, status,0
+   453 ;; Tracked objects:
+   454 ;;		On entry : 0/0
+   455 ;;		On exit  : 0/0
+   456 ;;		Unchanged: 0/0
+   457 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   458 ;;      Params:         4       0       0       0       0
+   459 ;;      Locals:         2       0       0       0       0
+   460 ;;      Temps:          0       0       0       0       0
+   461 ;;      Totals:         6       0       0       0       0
+   462 ;;Total ram usage:        6 bytes
+   463 ;; Hardware stack levels used:    1
+   464 ;; This function calls:
+   465 ;;		Nothing
+   466 ;; This function is called by:
+   467 ;;		_Delay_sec_Timer0
+   468 ;; This function uses a non-reentrant model
+   469 ;;
+   470                           psect	text81
+   471                           	file	"C:\Program Files\HI-TECH Software\PICC\9.71a\sources\wmul.c"
+   472                           	line	3
+   473                           	global	__size_of___wmul
+   474  0029                     	__size_of___wmul	equ	__end_of___wmul-___wmul
+   475                           	
+   476  07AA                     ___wmul:	
+   477                           	opt	stack 6
+   478                           ; Regs used in ___wmul: [wreg+status,2+status,0]
+   479                           	line	4
+   480                           	
+   481  07AA                     l1546:	
+   482  07AA  3000               	movlw	low(0)
+   483  07AB  00F4               	movwf	(___wmul@product)
+   484  07AC  3000               	movlw	high(0)
+   485  07AD  00F5               	movwf	((___wmul@product))+1
+   486                           	line	6
+   487                           	
+   488  07AE                     l1152:	
+   489                           	line	7
+   490                           	
+   491  07AE                     l1548:	
+   492  07AE  1C70               	btfss	(___wmul@multiplier),(0)&7
+   493  07AF  2FB1               	goto	u51
+   494  07B0  2FB2               	goto	u50
+   495  07B1                     u51:
+   496  07B1  2FB8               	goto	l1153
+   497  07B2                     u50:
+   498                           	line	8
+   499                           	
+   500  07B2                     l1550:	
+   501  07B2  0872               	movf	(___wmul@multiplicand),w
+   502  07B3  07F4               	addwf	(___wmul@product),f
+   503  07B4  1803               	skipnc
+   504  07B5  0AF5               	incf	(___wmul@product+1),f
+   505  07B6  0873               	movf	(___wmul@multiplicand+1),w
+   506  07B7  07F5               	addwf	(___wmul@product+1),f
+   507                           	
+   508  07B8                     l1153:	
+   509                           	line	9
+   510  07B8  3001               	movlw	01h
+   511                           	
+   512  07B9                     u65:
+   513  07B9  1003               	clrc
+   514  07BA  0DF2               	rlf	(___wmul@multiplicand),f
+   515  07BB  0DF3               	rlf	(___wmul@multiplicand+1),f
+   516  07BC  3EFF               	addlw	-1
+   517  07BD  1D03               	skipz
+   518  07BE  2FB9               	goto	u65
+   519                           	line	10
+   520                           	
+   521  07BF                     l1552:	
+   522  07BF  3001               	movlw	01h
+   523                           	
+   524  07C0                     u75:
+   525  07C0  1003               	clrc
+   526  07C1  0CF1               	rrf	(___wmul@multiplier+1),f
+   527  07C2  0CF0               	rrf	(___wmul@multiplier),f
+   528  07C3  3EFF               	addlw	-1
+   529  07C4  1D03               	skipz
+   530  07C5  2FC0               	goto	u75
+   531                           	line	11
+   532  07C6  0871               	movf	((___wmul@multiplier+1)),w
+   533  07C7  0470               	iorwf	((___wmul@multiplier)),w
+   534  07C8  1D03               	skipz
+   535  07C9  2FCB               	goto	u81
+   536  07CA  2FCC               	goto	u80
+   537  07CB                     u81:
+   538  07CB  2FAE               	goto	l1152
+   539  07CC                     u80:
+   540                           	
+   541  07CC                     l1154:	
+   542                           	line	12
+   543                           	
+   544  07CC                     l1554:	
+   545  07CC  0875               	movf	(___wmul@product+1),w
+   546  07CD  01F1               	clrf	(?___wmul+1)
+   547  07CE  07F1               	addwf	(?___wmul+1)
+   548  07CF  0874               	movf	(___wmul@product),w
+   549  07D0  01F0               	clrf	(?___wmul)
+   550  07D1  07F0               	addwf	(?___wmul)
+   551                           
+   552                           	
+   553  07D2                     l1556:	
+   554                           	line	13
+   555                           	
+   556  07D2                     l1155:	
+   557  07D2  0008               	return
+   558                           	opt stack 0
+   559                           GLOBAL	__end_of___wmul
+   560  07D3                     	__end_of___wmul:
+   561 ;; =============== function ___wmul ends ============
+   562                           
+   563                           	signat	___wmul,8314
+   564                           	global	_Timer0_Init
+   565                           psect	text82,local,class=CODE,delta=2
+   566                           global __ptext82
+   567  0786                     __ptext82:
+   568                           
+   569 ;; *************** function _Timer0_Init *****************
+   570 ;; Defined at:
+   571 ;;		line 7 in file "../../app/inc/..\..\platform\..\core\drv\adc\inc\adc_driver.h"
+   572 ;; Parameters:    Size  Location     Type
+   573 ;;		None
+   574 ;; Auto vars:     Size  Location     Type
+   575 ;;		None
+   576 ;; Return value:  Size  Location     Type
+   577 ;;		None               void
+   578 ;; Registers used:
+   579 ;;		wreg
+   580 ;; Tracked objects:
+   581 ;;		On entry : 0/0
+   582 ;;		On exit  : 0/0
+   583 ;;		Unchanged: 0/0
+   584 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   585 ;;      Params:         0       0       0       0       0
+   586 ;;      Locals:         0       0       0       0       0
+   587 ;;      Temps:          0       0       0       0       0
+   588 ;;      Totals:         0       0       0       0       0
+   589 ;;Total ram usage:        0 bytes
+   590 ;; Hardware stack levels used:    1
+   591 ;; This function calls:
+   592 ;;		Nothing
+   593 ;; This function is called by:
+   594 ;;		_main
+   595 ;; This function uses a non-reentrant model
+   596 ;;
+   597                           psect	text82
+   598                           	file	"../../app/inc/..\..\platform\..\core\drv\adc\inc\adc_driver.h"
+   599                           	line	7
+   600                           	global	__size_of_Timer0_Init
+   601  0009                     	__size_of_Timer0_Init	equ	__end_of_Timer0_Init-_Timer0_Init
+   602                           	
+   603  0786                     _Timer0_Init:	
+   604                           	opt	stack 7
+   605                           ; Regs used in _Timer0_Init: [wreg]
+   606                           	line	9
+   607                           	
+   608  0786                     l1524:	
+   609                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 9: OPTION=0x01;
+   610  0786  3001               	movlw	(01h)
+   611  0787  1683               	bsf	status, 5	;RP0=1, select bank1
+   612  0788  1303               	bcf	status, 6	;RP1=0, select bank1
+   613  0789  0081               	movwf	(129)^080h	;volatile
+   614                           	line	10
+   615                           ;..\..\platform\..\core\drv\adc\inc\adc_driver.h: 10: TMR0=0X06;
+   616  078A  3006               	movlw	(06h)
+   617  078B  1283               	bcf	status, 5	;RP0=0, select bank0
+   618  078C  1303               	bcf	status, 6	;RP1=0, select bank0
+   619  078D  0081               	movwf	(1)	;volatile
+   620                           	line	12
+   621                           	
+   622  078E                     l1125:	
+   623  078E  0008               	return
+   624                           	opt stack 0
+   625                           GLOBAL	__end_of_Timer0_Init
+   626  078F                     	__end_of_Timer0_Init:
+   627 ;; =============== function _Timer0_Init ends ============
+   628                           
+   629                           	signat	_Timer0_Init,88
+   630                           psect	text83,local,class=CODE,delta=2
+   631                           global __ptext83
+   632  0000                     __ptext83:
+   633                           	global	btemp
+   634  007E                     	btemp set 07Eh
+   635                           
+   636                           	DABS	1,126,2	;btemp
+   637                           	global	wtemp0
+   638  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.71a build 6446 
+Symbol Table                                                                                   Mon Dec 21 18:29:21 2020
+
+                       u50 07B2                         u51 07B1                         u80 07CC  
+                       u81 07CB                         u65 07B9                         u75 07C0  
+      ___wmul@multiplicand 0072                        l563 079A                        l564 07A6  
+                      l565 07A7                        l566 07A7                       l1140 07EA  
+                     l1125 078E                       l1141 07EE                       l1142 07FF  
+                     l1143 07FF                       l1152 07AE                       l1153 07B8  
+                     l1137 07F9                       l1154 07CC                       l1138 07E9  
+                     l1155 07D2                       l1139 07EA                       l2330 07F9  
+                     l1524 0786                       l2324 07D3                       l2332 078F  
+                     l1550 07B2                       l2326 07EE                       l2334 0795  
+                     l1552 07BF                       l2328 07F2                       l2336 079A  
+                     l1554 07CC                       l1546 07AA                       l2338 079D  
+                     l1556 07D2                       l1548 07AE                       _T0IF 005A  
+                     u2160 07EE                       u2161 07ED                       u2170 07FF  
+                     u2171 07FE                       _TMR0 0001   __end_of_Delay_sec_Timer0 0800  
+                     _main 078F                       btemp 007E                       start 0000  
+                    ?_main 0070                      _PORTB 0006                      _TRISB 0086  
+                    status 0003                      wtemp0 007E               __end_of_main 07AA  
+                   ??_main 0078                     _OPTION 0081              ??_Timer0_Init 0070  
+                   ___wmul 07AA             __pcstackCOMMON 0070        __end_of_Timer0_Init 078F  
+        ?_Delay_sec_Timer0 0076         ??_Delay_sec_Timer0 0078                 __pmaintext 078F  
+                  ?___wmul 0070                _Timer0_Init 0786            __size_of___wmul 0029  
+    Delay_sec_Timer0@Delay 0076       end_of_initialization 0782             __end_of___wmul 07D3  
+      start_initialization 0782                   ??___wmul 0074  __size_of_Delay_sec_Timer0 002D  
+             ?_Timer0_Init 0070             ___wmul@product 0074          ___wmul@multiplier 0070  
+         _Delay_sec_Timer0 07D3                   __ptext80 07D3                   __ptext81 07AA  
+                 __ptext82 0786                   __ptext83 0000                   __ptext79 0000  
+            __size_of_main 001B       __size_of_Timer0_Init 0009  

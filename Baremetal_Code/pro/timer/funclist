@@ -1,0 +1,5 @@
+_Timer0_Init: CODE, 1926 0 9
+_main: CODE, 1935 0 27
+_Delay_sec_Timer0: CODE, 2003 0 45
+___wmul: CODE, 1962 0 41
+Total: 122
