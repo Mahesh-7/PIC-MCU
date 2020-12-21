@@ -1,0 +1,18 @@
+_lcd_cmd: CODE, 552 0 19
+_display: CODE, 1187 0 135
+_display1: CODE, 1322 0 147
+___ftpack: CODE, 1070 0 117
+_main: CODE, 962 0 108
+___lwtoft: CODE, 590 0 30
+_lcd_char: CODE, 571 0 19
+_temp_value: CODE, 882 0 80
+___lwdiv: CODE, 809 0 73
+_adc_value: CODE, 503 0 14
+___lwmod: CODE, 748 0 61
+___ftmul: CODE, 1819 0 229
+_adc_init: CODE, 689 0 59
+___fttol: CODE, 1469 0 156
+_lcd_string: CODE, 653 0 36
+_lcd_init: CODE, 620 0 33
+___ftdiv: CODE, 1625 0 194
+Total: 1510
