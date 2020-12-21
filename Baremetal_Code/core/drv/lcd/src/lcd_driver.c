@@ -1,9 +1,12 @@
 #include<pic.h>
 
+#define APP_H "../../app/inc/app.h"
+#include APP_H 
+
 #define RS RE0
 #define RW RE1
 #define EN RE2
-#define  _XTAL_FREQ 40000000
+
 
 void lcd_cmd(unsigned char cmd)
 {
